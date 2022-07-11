@@ -17,6 +17,7 @@ function QuizGame() {
     const [score, setScore] = useState(0);
     const [timer, setTimer] = useState(15);
     const [countdown, setCountdown] = useState(3);
+    const [imgLoading, setImgLoading] = useState(true);
 
     const startQuiz = async () => {
         await fetchQuestions();
@@ -66,6 +67,7 @@ function QuizGame() {
         if (questionNumber + 1 < questions.length) {
             setQuestionNumber(questionNumber + 1);
             setTimer(15);
+            setImgLoading(true);
         } else {
             setGameState("post-game");
         }
@@ -73,7 +75,7 @@ function QuizGame() {
 
     useEffect(() => {
         let timerId: NodeJS.Timer;
-        if (gameState === "in-progress" && !userAnswer) {
+        if (gameState === "in-progress" && !userAnswer && !imgLoading) {
             timerId = setInterval(() => {
                 setTimer(timer - 0.1);
                 if (timer < 0.1) {
@@ -134,7 +136,7 @@ function QuizGame() {
                 </div>
 
                 <div className="w-3/4 md:w-2/3 aspect-square mx-auto border border-solid border-yellow-500 rounded-sm relative">
-                    <Image src={`/${questions[questionNumber].imagePath}`} layout="fill" alt="" priority/>
+                    <Image src={`/${questions[questionNumber].imagePath}`} layout="fill" alt="" priority onLoad={() => setImgLoading(false)}/>
                 </div>
                 <ul className="flex flex-row flex-wrap justify-between w-3/4 md:w-2/3 mx-auto mt-1">
                     {questions[questionNumber].answers.map(answer => (
