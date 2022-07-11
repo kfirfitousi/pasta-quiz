@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Container from "../container";
 import PostGame from "./postGame";
-import QuestionType from "../../types/question";
+
+type QuestionType = {
+    imagePath: string,
+    answers: string[],
+    correctAnswer: string
+}
 
 function QuizGame() {
     const [questions, setQuestions] = useState<QuestionType[]>([]);
