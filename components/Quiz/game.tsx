@@ -67,7 +67,6 @@ function QuizGame() {
         if (questionNumber + 1 < questions.length) {
             setQuestionNumber(questionNumber + 1);
             setTimer(15);
-            setImgLoading(true);
         } else {
             setGameState("post-game");
         }
@@ -136,7 +135,13 @@ function QuizGame() {
                 </div>
 
                 <div className="w-3/4 md:w-2/3 aspect-square mx-auto border border-solid border-yellow-500 rounded-sm relative">
-                    <Image src={`/${questions[questionNumber].imagePath}`} layout="fill" alt="" priority onLoad={() => setImgLoading(false)}/>
+                    <Image 
+                        src={`/${questions[questionNumber].imagePath}`} 
+                        layout="fill" alt="" 
+                        onLoadStart={() => setImgLoading(true)}
+                        onLoad={() => setImgLoading(false)}
+                        style={{opacity: imgLoading ? 0 : 1}}
+                        priority />
                 </div>
                 <ul className="flex flex-row flex-wrap justify-between w-3/4 md:w-2/3 mx-auto mt-1">
                     {questions[questionNumber].answers.map(answer => (
