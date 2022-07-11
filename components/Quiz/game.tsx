@@ -134,7 +134,7 @@ function QuizGame() {
                 </div>
 
                 <div className="w-3/4 md:w-2/3 aspect-square mx-auto border border-solid border-yellow-500 rounded-sm relative">
-                    <Image src={`/${questions[questionNumber].imagePath}`} layout="fill" alt=""/>
+                    <Image src={`/${questions[questionNumber].imagePath}`} layout="fill" alt="" priority/>
                 </div>
                 <ul className="flex flex-row flex-wrap justify-between w-3/4 md:w-2/3 mx-auto mt-1">
                     {questions[questionNumber].answers.map(answer => (
