@@ -14,23 +14,7 @@ type RequestBody = {
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
-    if (req.method === 'GET') {
-        const { error, data } = await supabase
-            .from('leaderboard')
-            .select('name, score')
-            .limit(10)
-            .order('score', { ascending: false });
-        if (error) {
-            res.json({
-                error: true
-            });
-        } else {
-            res.json({
-                scoreList: data,
-                error: false
-            });
-        }
-    } else if (req.method === 'POST') {
+    if (req.method === 'POST') {
         const { gameData, name }: RequestBody = JSON.parse(req.body);
         const score = gameData.reduce((acc, round) => {
             if (round.question.correctAnswer === round.userAnswer) {
@@ -47,7 +31,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
         res.status(error ? 500 : 200).end();
     } else {
-        res.setHeader('Allow', ['GET', 'POST']);
+        res.setHeader('Allow', ['POST']);
         res.status(405).end(`Method ${req.method} Not Allowed`);
     }
 }

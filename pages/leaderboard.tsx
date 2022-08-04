@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import { GetStaticProps } from 'next';
-import { server } from 'config';
+import { supabase } from 'lib/initSupabase';
 
 import Head from 'next/head';
 import Header from 'components/Header';
@@ -10,15 +10,18 @@ import type { InferGetStaticPropsType } from 'next';
 import type { ScoreType } from 'types';
 
 type ScoreData = {
-    scoreList?: ScoreType[];
+    scoreList: ScoreType[] | null;
 };
 
 export const getStaticProps: GetStaticProps<ScoreData> = async () => {
-    const res = await fetch(`${server}/api/scores`);
-    const { scoreList }: ScoreData = await res.json();
+    const { error, data } = await supabase
+        .from('leaderboard')
+        .select('name, score')
+        .limit(10)
+        .order('score', { ascending: false });
     return {
         props: {
-            scoreList
+            scoreList: error ? null : data
         }
     };
 };
