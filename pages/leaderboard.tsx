@@ -1,19 +1,19 @@
 import { NextPage } from 'next';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { supabase } from 'lib/initSupabase';
 
 import Head from 'next/head';
 import Header from 'components/Header';
 import Container from 'components/Container';
 
-import type { InferGetStaticPropsType } from 'next';
+import type { InferGetServerSidePropsType } from 'next';
 import type { ScoreType } from 'types';
 
 type ScoreData = {
     scoreList: ScoreType[] | null;
 };
 
-export const getStaticProps: GetStaticProps<ScoreData> = async () => {
+export const getServerSideProps: GetServerSideProps<ScoreData> = async () => {
     const { error, data } = await supabase
         .from('leaderboard')
         .select('name, score')
@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps<ScoreData> = async () => {
 
 const Leaderboard: NextPage<ScoreData> = ({
     scoreList
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     return (
         <Container>
             <Head>
