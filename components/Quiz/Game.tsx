@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Container from 'components/Container';
-import PostGame from './postGame';
+import PostGame from './PostGame';
 
 import type { QuestionType, GameData } from 'types';
 
