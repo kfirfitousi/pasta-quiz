@@ -11,10 +11,10 @@ import Link from 'next/link';
 type Props = {
     gameData: GameData;
     finalScore: number;
-    restartQuiz: () => void;
+    initGame: () => void;
 };
 
-const PostGame: NextPage<Props> = ({ gameData, finalScore, restartQuiz }: Props) => {
+const PostGame: NextPage<Props> = ({ gameData, finalScore, initGame }: Props) => {
     const [name, setName] = useState('');
     const [submitPending, setSubmitPending] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -38,7 +38,7 @@ const PostGame: NextPage<Props> = ({ gameData, finalScore, restartQuiz }: Props)
             <h2 className="text-lg text-yellow-800 text-center mt-32 mb-2">
                 You scored {finalScore} points!
             </h2>
-            
+
             <div className="w-2/3 mx-auto">
                 {submitSuccess ? (
                     <p className="text-center text-yellow-800 mb-4">
@@ -78,7 +78,7 @@ const PostGame: NextPage<Props> = ({ gameData, finalScore, restartQuiz }: Props)
             <div className="w-36 mx-auto">
                 <button
                     className="bg-yellow-300 text-yellow-800 hover:bg-yellow-800 hover:text-yellow-300 rounded w-full h-8 mx-auto"
-                    onClick={() => restartQuiz()}
+                    onClick={() => initGame()}
                 >
                     Play Again
                 </button>

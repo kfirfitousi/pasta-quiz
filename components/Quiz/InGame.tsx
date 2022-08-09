@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import type { RoundData, QuestionType } from 'types';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import Container from 'components/Container';
@@ -25,52 +25,51 @@ const InGame: NextPage<Props> = ({
     const [timer, setTimer] = useState(15);
     const [imgLoading, setImgLoading] = useState(true);
 
-    const handleAnswer = (answer: string) => {
-        setUserAnswer(answer);
-        if (answer === questions[questionNumber].correctAnswer) {
-            setScore(Math.ceil(score + timer * 10));
+    const endRound = useCallback(() => {
+        if (questionNumber + 1 < questions.length) {
+            setUserAnswer('');
+            setQuestionNumber(questionNumber + 1);
+            setTimer(15);
+        } else {
+            endGame();
         }
+    }, [questionNumber, questions.length, endGame]);
 
-        collectRoundData({
-            question: questions[questionNumber],
-            userAnswer: answer,
-            timer
-        });
+    const handleAnswer = useCallback(
+        (answer: string) => {
+            setUserAnswer(answer);
+            if (answer === questions[questionNumber].correctAnswer) {
+                setScore(Math.ceil(score + timer * 10));
+            }
 
-        setTimeout(() => {
-            questionNumber + 1 < questions.length ? nextQuestion() : endGame();
-        }, 1000);
-    };
+            collectRoundData({
+                question: questions[questionNumber],
+                userAnswer: answer,
+                timer
+            });
 
-    const nextQuestion = () => {
-        setUserAnswer('');
-        setQuestionNumber(questionNumber + 1);
-        setTimer(15);
-    };
+            setTimeout(() => {
+                endRound();
+            }, 1000);
+        },
+        [questions, questionNumber, score, timer, collectRoundData, endRound]
+    );
 
     useEffect(() => {
         return () => setFinalScore(score);
     });
 
     useEffect(() => {
-        let timerId: NodeJS.Timer;
+        let timeoutId: NodeJS.Timeout;
 
-        if (!userAnswer && !imgLoading) {
-            timerId = setInterval(() => {
-                setTimer(timer - 0.1);
-                if (timer < 0.1) {
-                    clearInterval(timerId);
-                    setTimer(0);
-                    handleAnswer('no-answer');
-                    setTimeout(() => {
-                        questionNumber + 1 < questions.length ? nextQuestion() : endGame();
-                    }, 1000);
-                }
-            }, 100);
+        if (timer > 0) {
+            if (!userAnswer && !imgLoading) {
+                timeoutId = setTimeout(() => {
+                    timer < 0.1 ? handleAnswer('no-answer') : setTimer(timer - 0.1);
+                }, 100);
+            }
         }
-
-        return () => clearInterval(timerId);
-    });
+    }, [timer, userAnswer, imgLoading, handleAnswer]);
 
     return (
         <Container>

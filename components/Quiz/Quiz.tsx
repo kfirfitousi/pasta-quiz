@@ -66,7 +66,7 @@ function QuizGame() {
                 />
             );
         case 'post-game':
-            return <PostGame gameData={gameData} finalScore={finalScore} restartQuiz={initGame} />;
+            return <PostGame gameData={gameData} finalScore={finalScore} initGame={initGame} />;
     }
 }
 

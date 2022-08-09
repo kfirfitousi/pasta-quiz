@@ -12,15 +12,14 @@ const Countdown: NextPage<Props> = ({ startGame }: Props) => {
     const [countdown, setCountdown] = useState(3);
 
     useEffect(() => {
-        let countdownId = setInterval(() => {
-            setCountdown(countdown - 1);
-            if (countdown === 1) {
-                startGame();
-            }
-        }, 1000);
-
-        return () => clearInterval(countdownId);
-    });
+        if (countdown > 0) {
+            setTimeout(() => {
+                setCountdown(countdown - 1);
+            }, 1000);
+        } else {
+            startGame();
+        }
+    }, [countdown, startGame]);
 
     return (
         <Container>
