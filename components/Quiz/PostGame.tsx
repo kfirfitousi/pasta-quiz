@@ -1,19 +1,20 @@
-import { NextPage } from 'next';
+import type { NextPage } from 'next';
+import type { GameData } from 'types';
+
 import { useState } from 'react';
 import { server } from 'config';
 
 import Container from 'components/Container';
+import Spinner from 'components/Spinner';
 import Link from 'next/link';
 
-import type { GameData } from 'types';
-
 type Props = {
-    score: number;
-    restartQuiz: () => void;
     gameData: GameData;
+    finalScore: number;
+    restartQuiz: () => void;
 };
 
-const PostGame: NextPage<Props> = ({ score, restartQuiz, gameData }: Props) => {
+const PostGame: NextPage<Props> = ({ gameData, finalScore, restartQuiz }: Props) => {
     const [name, setName] = useState('');
     const [submitPending, setSubmitPending] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -35,10 +36,19 @@ const PostGame: NextPage<Props> = ({ score, restartQuiz, gameData }: Props) => {
     return (
         <Container>
             <h2 className="text-lg text-yellow-800 text-center mt-32 mb-2">
-                You scored {score} points!
+                You scored {finalScore} points!
             </h2>
+            
             <div className="w-2/3 mx-auto">
-                {!submitSuccess && (
+                {submitSuccess ? (
+                    <p className="text-center text-yellow-800 mb-4">
+                        Your score has been submitted to the&nbsp;
+                        <Link href="/leaderboard">
+                            <span className="underline text-bold cursor-pointer">leaderboard</span>
+                        </Link>
+                        !
+                    </p>
+                ) : (
                     <div className="flex flex-row w-fit mx-auto mb-4">
                         <input
                             type="text"
@@ -52,18 +62,9 @@ const PostGame: NextPage<Props> = ({ score, restartQuiz, gameData }: Props) => {
                             onClick={() => uploadScore()}
                             disabled={submitPending}
                         >
-                            {submitPending ? '...' : 'Submit'}
+                            {submitPending ? <Spinner /> : 'Submit'}
                         </button>
                     </div>
-                )}
-                {submitSuccess && (
-                    <p className="text-center text-yellow-800 mb-4">
-                        Your score has been submitted to the&nbsp;
-                        <Link href="/leaderboard">
-                            <span className="underline text-bold cursor-pointer">leaderboard</span>
-                        </Link>
-                        !
-                    </p>
                 )}
                 {submitError && (
                     <p className="text-center text-yellow-800 mb-4">
@@ -73,6 +74,7 @@ const PostGame: NextPage<Props> = ({ score, restartQuiz, gameData }: Props) => {
                     </p>
                 )}
             </div>
+
             <div className="w-36 mx-auto">
                 <button
                     className="bg-yellow-300 text-yellow-800 hover:bg-yellow-800 hover:text-yellow-300 rounded w-full h-8 mx-auto"

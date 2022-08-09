@@ -1,26 +1,20 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { GameData, ScoreType } from 'types';
+import type { GameData } from 'types';
 
 import { supabase } from 'lib/initSupabase';
-
-type ResponseData = {
-    scoreList?: ScoreType[];
-    error: boolean;
-};
 
 type RequestBody = {
     name: string;
     gameData: GameData;
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
         const { gameData, name }: RequestBody = JSON.parse(req.body);
         const score = gameData.reduce((acc, round) => {
-            if (round.question.correctAnswer === round.userAnswer) {
-                return Math.ceil(acc + round.time * 10);
-            }
-            return acc;
+            return round.userAnswer === round.question.correctAnswer
+                ? Math.ceil(acc + round.timer * 10)
+                : acc;
         }, 0);
 
         const { error } = await supabase.from('leaderboard').insert({

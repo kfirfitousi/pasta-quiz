@@ -1,7 +1,8 @@
 import type { NextPage } from 'next';
+
 import Head from 'next/head';
 import Header from 'components/Header';
-import Container from 'components/Container/Container';
+import Container from 'components/Container';
 import Quiz from 'components/Quiz';
 
 const Home: NextPage = () => {
@@ -9,7 +10,12 @@ const Home: NextPage = () => {
         <Container>
             <Head>
                 <title>Pasta Quiz</title>
-                <meta name="description" content="Put your Pasta knowledge to the test!" />
+                <meta
+                    name="description"
+                    content="Put your Pasta knowledge to the test! 
+                    How many pasta shapes can you recognize?
+                    Take the quiz or learn more about pasta shapes."
+                />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 

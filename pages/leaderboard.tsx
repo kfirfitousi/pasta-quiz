@@ -1,39 +1,33 @@
-import { NextPage } from 'next';
-import { GetServerSideProps } from 'next';
-import { supabase } from 'lib/initSupabase';
+import type { NextPage, GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import Head from 'next/head';
 import Header from 'components/Header';
 import Container from 'components/Container';
 
-import type { InferGetServerSidePropsType } from 'next';
-import type { ScoreType } from 'types';
+import { supabase } from 'lib/initSupabase';
 
-type ScoreData = {
+type ScoreType = {
+    name: string;
+    score: number;
+};
+
+type Props = {
     scoreList: ScoreType[] | null;
 };
 
-export const getServerSideProps: GetServerSideProps<ScoreData> = async () => {
-    const { error, data } = await supabase
-        .from('leaderboard')
-        .select('name, score')
-        .limit(10)
-        .order('score', { ascending: false });
-    return {
-        props: {
-            scoreList: error ? null : data
-        }
-    };
-};
-
-const Leaderboard: NextPage<ScoreData> = ({
+const Leaderboard: NextPage<Props> = ({
     scoreList
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     return (
         <Container>
             <Head>
                 <title>Pasta Quiz | Leaderboard</title>
-                <meta name="description" content="Put your Pasta knowledge to the test!" />
+                <meta
+                    name="description"
+                    content="Put your Pasta knowledge to the test! 
+                    How many pasta shapes can you recognize?
+                    Check the leaderboard to see the current high scores."
+                />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
@@ -63,6 +57,20 @@ const Leaderboard: NextPage<ScoreData> = ({
             )}
         </Container>
     );
+};
+
+export const getServerSideProps: GetServerSideProps<Props> = async ({ res }) => {
+    res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
+    const { error, data } = await supabase
+        .from('leaderboard')
+        .select('name, score')
+        .limit(10)
+        .order('score', { ascending: false });
+    return {
+        props: {
+            scoreList: error ? null : data
+        }
+    };
 };
 
 export default Leaderboard;

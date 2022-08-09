@@ -4,13 +4,10 @@ export type QuestionType = {
     correctAnswer: string;
 };
 
-export type GameData = {
+export type RoundData = {
     question: QuestionType;
     userAnswer: string;
-    time: number;
-}[];
-
-type ScoreType = {
-    name: string;
-    score: number;
+    timer: number;
 };
+
+export type GameData = RoundData[];

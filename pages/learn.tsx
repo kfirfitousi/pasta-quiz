@@ -1,4 +1,5 @@
-import type { NextPage } from 'next';
+import type { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
+
 import Head from 'next/head';
 import Header from 'components/Header';
 import Container from 'components/Container';
@@ -13,12 +14,17 @@ type Props = {
     shapes: ShapeType[];
 };
 
-const Learn: NextPage<Props> = ({ shapes }: Props) => {
+const Learn: NextPage<Props> = ({ shapes }: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
         <Container>
             <Head>
                 <title>Pasta Quiz | Learn</title>
-                <meta name="description" content="Put your Pasta knowledge to the test!" />
+                <meta
+                    name="description"
+                    content="Put your Pasta knowledge to the test! 
+                    How many pasta shapes can you recognize?
+                    Learn about pasta shapes here."
+                />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
@@ -45,7 +51,7 @@ const Learn: NextPage<Props> = ({ shapes }: Props) => {
     );
 };
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps<Props> = async () => {
     const pasta = await import('../data/pasta.json');
     return {
         props: {
