@@ -8,7 +8,7 @@ import Container from 'components/Container';
 import Spinner from 'components/Spinner';
 import Link from 'next/link';
 
-type Props = {
+type PostGameProps = {
     gameData: GameData;
     finalScore: number;
     initGame: () => void;
@@ -20,7 +20,7 @@ type ApiResponse = {
     } | null;
 };
 
-const PostGame: NextPage<Props> = ({ gameData, finalScore, initGame }: Props) => {
+const PostGame: NextPage<PostGameProps> = ({ gameData, finalScore, initGame }: PostGameProps) => {
     const [name, setName] = useState('');
     const [submitPending, setSubmitPending] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);

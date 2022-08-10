@@ -10,11 +10,13 @@ type ShapeType = {
     imagePath: string;
 };
 
-type Props = {
+type LearnProps = {
     shapes: ShapeType[];
 };
 
-const Learn: NextPage<Props> = ({ shapes }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Learn: NextPage<LearnProps> = ({
+    shapes
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
         <Container>
             <Head>
@@ -51,7 +53,7 @@ const Learn: NextPage<Props> = ({ shapes }: InferGetStaticPropsType<typeof getSt
     );
 };
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
+export const getStaticProps: GetStaticProps<LearnProps> = async () => {
     const pasta = await import('../data/pasta.json');
     return {
         props: {

@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 
 import Container from 'components/Container';
 
-type Props = {
+type CountdownProps = {
     startGame: () => void;
 };
 
-const Countdown: NextPage<Props> = ({ startGame }: Props) => {
+const Countdown: NextPage<CountdownProps> = ({ startGame }: CountdownProps) => {
     const [countdown, setCountdown] = useState(3);
 
     useEffect(() => {

@@ -2,11 +2,11 @@ import type { NextPage } from 'next';
 
 import Container from 'components/Container';
 
-type Props = {
+type PreGameProps = {
     initGame: () => void;
 };
 
-const PreGame: NextPage<Props> = ({ initGame }: Props) => {
+const PreGame: NextPage<PreGameProps> = ({ initGame }: PreGameProps) => {
     return (
         <Container>
             <p className="text-xl text-center text-yellow-800 mt-44 md:mt-52">

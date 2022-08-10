@@ -11,12 +11,12 @@ type ScoreType = {
     score: number;
 };
 
-type Props = {
-    scoreList: ScoreType[] | null;
+type LeaderboardProps = {
+    scores: ScoreType[] | null;
 };
 
-const Leaderboard: NextPage<Props> = ({
-    scoreList
+const Leaderboard: NextPage<LeaderboardProps> = ({
+    scores
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     return (
         <Container>
@@ -33,13 +33,13 @@ const Leaderboard: NextPage<Props> = ({
 
             <Header />
 
-            {scoreList ? (
+            {scores ? (
                 <div className="flex flex-col items-center mt-5 text-yellow-800">
                     <div className="flex flex-row text-center md:h-8">
                         <p className="w-52 md:w-80 md:leading-8 md:text-lg">Name</p>
                         <p className="w-20 md:leading-8 md:text-lg">Score</p>
                     </div>
-                    {scoreList.map((player, index) => (
+                    {scores.map((player, index) => (
                         <div key={index} className="flex flex-row text-center md:h-8">
                             <p className="w-52 md:w-80 md:leading-8 md:text-lg bg-yellow-200 border-b border-solid border-yellow-300 select-all">
                                 {player.name}
@@ -59,7 +59,7 @@ const Leaderboard: NextPage<Props> = ({
     );
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({ res }) => {
+export const getServerSideProps: GetServerSideProps<LeaderboardProps> = async ({ res }) => {
     res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
     const { error, data } = await supabase
         .from('leaderboard')
@@ -68,7 +68,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ res }) => 
         .order('score', { ascending: false });
     return {
         props: {
-            scoreList: error ? null : data
+            scores: error ? null : data
         }
     };
 };

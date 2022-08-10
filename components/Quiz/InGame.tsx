@@ -6,24 +6,23 @@ import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Container from 'components/Container';
 
-type Props = {
+type InGameProps = {
     questions: QuestionType[];
     collectRoundData: (roundData: RoundData) => void;
     setFinalScore: (score: number) => void;
     endGame: () => void;
 };
 
-const InGame: NextPage<Props> = ({
+const InGame: NextPage<InGameProps> = ({
     questions,
     collectRoundData,
     setFinalScore,
     endGame
-}: Props) => {
+}: InGameProps) => {
     const [questionNumber, setQuestionNumber] = useState(0);
     const [userAnswer, setUserAnswer] = useState('');
     const [score, setScore] = useState(0);
     const [timer, setTimer] = useState(15);
-    const [imgLoading, setImgLoading] = useState(true);
 
     const handleAnswer = (answer: string) => {
         setUserAnswer(answer);
@@ -56,7 +55,7 @@ const InGame: NextPage<Props> = ({
     useEffect(() => setFinalScore(score), [setFinalScore, score]);
 
     useEffect(() => {
-        if (timer > 0 && !userAnswer && !imgLoading) {
+        if (timer > 0 && !userAnswer) {
             setTimeout(() => {
                 if (timer >= 0.1) {
                     setTimer(timer - 0.1);
@@ -75,7 +74,7 @@ const InGame: NextPage<Props> = ({
                 }
             }, 100);
         }
-    }, [timer, userAnswer, imgLoading, collectRoundData, endRound]);
+    }, [timer, userAnswer, collectRoundData, endRound]);
 
     return (
         <Container>
@@ -89,9 +88,6 @@ const InGame: NextPage<Props> = ({
                     src={`/${questions[questionNumber].imagePath}`}
                     layout="fill"
                     alt="mysterious pasta shape"
-                    onLoadStart={() => setImgLoading(true)}
-                    onLoadingComplete={() => setImgLoading(false)}
-                    priority
                 />
             </div>
 

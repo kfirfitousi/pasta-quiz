@@ -1,8 +1,8 @@
-type Props = {
+type SpinnerProps = {
     size: number;
 };
 
-function Spinner({ size }: Props) {
+function Spinner({ size }: SpinnerProps) {
     return (
         <svg
             width={`${size}px`}
