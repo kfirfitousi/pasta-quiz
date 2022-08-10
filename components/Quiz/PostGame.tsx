@@ -15,9 +15,9 @@ type Props = {
 };
 
 type ApiResponse = {
-    error?: {
+    error: {
         message: string;
-    };
+    } | null;
 };
 
 const PostGame: NextPage<Props> = ({ gameData, finalScore, initGame }: Props) => {
@@ -36,6 +36,7 @@ const PostGame: NextPage<Props> = ({ gameData, finalScore, initGame }: Props) =>
 
         const res = await fetch(`${server}/api/scores`, {
             method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 name,
                 gameData

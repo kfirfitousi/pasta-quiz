@@ -16,16 +16,22 @@ const schema = z.object({
         .length(10)
 });
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+type ApiResponse = {
+    error: {
+        message: string;
+    } | null;
+};
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse<ApiResponse>) {
     if (req.method !== 'POST') {
         res.setHeader('Allow', ['POST']);
         return res.status(405).end(`Method ${req.method} Not Allowed`);
     }
 
-    const request = schema.safeParse(JSON.parse(req.body));
+    const request = schema.safeParse(req.body);
 
     if (!request.success) {
-        return res.status(400).send({
+        return res.status(400).json({
             error: {
                 message: 'Invalid payload'
             }
@@ -47,12 +53,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
 
     if (error) {
-        return res.status(500).send({
+        return res.status(500).json({
             error: {
                 message: 'Error occured while saving score'
             }
         });
     }
 
-    return res.status(200).end();
+    return res.status(200).json({
+        error: null
+    });
 }
