@@ -23,7 +23,7 @@ function PastaQuiz({ Component, pageProps }: AppProps) {
     }, [router]);
     return loading ? (
         <Container>
-            <div className="h-screen w-screen flex items-center justify-center text-yellow-800">
+            <div className="h-screen w-full flex items-center justify-center text-yellow-800">
                 <div>
                     <Spinner size={100} />
                 </div>
