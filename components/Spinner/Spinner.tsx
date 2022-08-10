@@ -1,8 +1,12 @@
-function Spinner() {
+type Props = {
+    size: number;
+};
+
+function Spinner({ size }: Props) {
     return (
         <svg
-            width="34px"
-            height="34px"
+            width={`${size}px`}
+            height={`${size}px`}
             viewBox="0 0 100 100"
             preserveAspectRatio="xMidYMid"
             className="fill-current mx-auto"

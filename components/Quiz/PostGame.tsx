@@ -62,7 +62,7 @@ const PostGame: NextPage<Props> = ({ gameData, finalScore, initGame }: Props) =>
                             onClick={() => uploadScore()}
                             disabled={submitPending}
                         >
-                            {submitPending ? <Spinner /> : 'Submit'}
+                            {submitPending ? <Spinner size={34} /> : 'Submit'}
                         </button>
                     </div>
                 )}
