@@ -19,7 +19,13 @@ function Header() {
                     <h2 className="font-bold min-w-fit mr-auto">Pasta Quiz</h2>
                     {routes.map(([path, name], index) => (
                         <Link href={path} key={index}>
-                            <a className={router.asPath === path ? 'underline' : ''}>{name}</a>
+                            <a
+                                className={
+                                    router.asPath === path ? 'underline underline-offset-8' : ''
+                                }
+                            >
+                                {name}
+                            </a>
                         </Link>
                     ))}
                 </nav>
