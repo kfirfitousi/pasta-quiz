@@ -10,7 +10,7 @@ import '../styles/globals.css';
 function PastaQuiz({ Component, pageProps }: AppProps) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-    
+
     useEffect(() => {
         router.events.on('routeChangeStart', () => setLoading(true));
         router.events.on('routeChangeComplete', () => setLoading(false));
