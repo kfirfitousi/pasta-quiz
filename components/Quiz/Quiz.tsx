@@ -3,6 +3,7 @@ import type { QuestionType, GameData, RoundData } from 'types';
 import { useState } from 'react';
 
 import { PreGame, Countdown, InGame, PostGame } from '.';
+import Head from 'next/head';
 
 const GameStates = ['pre-game', 'countdown', 'in-game', 'post-game'] as const;
 type GameState = typeof GameStates[number];
@@ -12,6 +13,7 @@ function QuizGame() {
     const [gameState, setGameState] = useState<GameState>('pre-game');
     const [gameData, setGameData] = useState<GameData>([]);
     const [finalScore, setFinalScore] = useState(0);
+    const [preloads, setPreloads] = useState<string[]>([]);
 
     const initGame = async () => {
         await fetchQuestions();
@@ -37,6 +39,7 @@ function QuizGame() {
                 correctAnswer: shape.name
             }));
         setQuestions(questions);
+        setPreloads(questions.map((question) => question.imagePath));
     };
 
     const collectRoundData = (roundData: RoundData) => {
@@ -51,23 +54,29 @@ function QuizGame() {
         setGameState('post-game');
     };
 
-    switch (gameState) {
-        case 'pre-game':
-            return <PreGame initGame={initGame} />;
-        case 'countdown':
-            return <Countdown startGame={startGame} />;
-        case 'in-game':
-            return (
+    return (
+        <>
+            <Head>
+                {preloads.map((preload, index) => (
+                    <link rel="preload" as="image" href={preload} key={index} />
+                ))}
+            </Head>
+
+            {gameState === 'pre-game' && <PreGame initGame={initGame} />}
+            {gameState === 'countdown' && <Countdown startGame={startGame} />}
+            {gameState === 'in-game' && (
                 <InGame
                     questions={questions}
                     collectRoundData={collectRoundData}
                     setFinalScore={setFinalScore}
                     endGame={endGame}
                 />
-            );
-        case 'post-game':
-            return <PostGame gameData={gameData} finalScore={finalScore} initGame={initGame} />;
-    }
+            )}
+            {gameState === 'post-game' && (
+                <PostGame gameData={gameData} finalScore={finalScore} initGame={initGame} />
+            )}
+        </>
+    );
 }
 
 export default QuizGame;
