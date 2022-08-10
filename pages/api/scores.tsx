@@ -1,24 +1,41 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { GameData } from 'types';
 
 import { supabase } from 'lib/initSupabase';
+import { z } from 'zod';
 
-type RequestBody = {
-    name: string;
-    gameData: GameData;
-};
+const schema = z.object({
+    name: z.string(),
+    gameData: z
+        .array(
+            z.object({
+                correctAnswer: z.string(),
+                userAnswer: z.string(),
+                timer: z.number()
+            })
+        )
+        .length(10)
+});
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'POST') {
         res.setHeader('Allow', ['POST']);
-        res.status(405).end(`Method ${req.method} Not Allowed`);
+        return res.status(405).end(`Method ${req.method} Not Allowed`);
     }
 
-    const { gameData, name }: RequestBody = JSON.parse(req.body);
-    const score = gameData.reduce((acc, round) => {
-        return round.userAnswer === round.question.correctAnswer
-            ? Math.ceil(acc + round.timer * 10)
-            : acc;
+    const request = schema.safeParse(JSON.parse(req.body));
+
+    if (!request.success) {
+        return res.status(400).send({
+            message: 'Invalid Payload'
+        });
+    }
+
+    const { name, gameData } = request.data;
+
+    const score = gameData.reduce((total, round) => {
+        return round.userAnswer === round.correctAnswer
+            ? Math.ceil(total + round.timer * 10)
+            : total;
     }, 0);
 
     const { error } = await supabase.from('leaderboard').insert({

@@ -25,6 +25,24 @@ const InGame: NextPage<Props> = ({
     const [timer, setTimer] = useState(15);
     const [imgLoading, setImgLoading] = useState(true);
 
+    const handleAnswer = (answer: string) => {
+        setUserAnswer(answer);
+
+        if (answer === questions[questionNumber].correctAnswer) {
+            setScore(Math.ceil(score + timer * 10));
+        }
+
+        collectRoundData({
+            correctAnswer: questions[questionNumber].correctAnswer,
+            userAnswer: answer,
+            timer
+        });
+
+        setTimeout(() => {
+            endRound();
+        }, 1000);
+    };
+
     const endRound = useCallback(() => {
         if (questionNumber + 1 < questions.length) {
             setUserAnswer('');
@@ -35,41 +53,29 @@ const InGame: NextPage<Props> = ({
         }
     }, [questionNumber, questions.length, endGame]);
 
-    const handleAnswer = useCallback(
-        (answer: string) => {
-            setUserAnswer(answer);
-            if (answer === questions[questionNumber].correctAnswer) {
-                setScore(Math.ceil(score + timer * 10));
-            }
+    useEffect(() => setFinalScore(score), [setFinalScore, score]);
 
-            collectRoundData({
-                question: questions[questionNumber],
-                userAnswer: answer,
-                timer
-            });
-
+    useEffect(() => {
+        if (timer > 0 && !userAnswer && !imgLoading) {
             setTimeout(() => {
-                endRound();
-            }, 1000);
-        },
-        [questions, questionNumber, score, timer, collectRoundData, endRound]
-    );
+                if (timer >= 0.1) {
+                    setTimer(timer - 0.1);
+                } else {
+                    setUserAnswer('no-answer');
 
-    useEffect(() => {
-        return () => setFinalScore(score);
-    });
+                    collectRoundData({
+                        correctAnswer: '',
+                        userAnswer: 'no-answer',
+                        timer: 0
+                    });
 
-    useEffect(() => {
-        let timeoutId: NodeJS.Timeout;
-
-        if (timer > 0) {
-            if (!userAnswer && !imgLoading) {
-                timeoutId = setTimeout(() => {
-                    timer < 0.1 ? handleAnswer('no-answer') : setTimer(timer - 0.1);
-                }, 100);
-            }
+                    setTimeout(() => {
+                        endRound();
+                    }, 1000);
+                }
+            }, 100);
         }
-    }, [timer, userAnswer, imgLoading, handleAnswer]);
+    }, [timer, userAnswer, imgLoading, collectRoundData, endRound]);
 
     return (
         <Container>
@@ -90,8 +96,8 @@ const InGame: NextPage<Props> = ({
             </div>
 
             <ul className="flex flex-row flex-wrap justify-between w-3/4 md:w-2/3 mx-auto mt-1">
-                {questions[questionNumber].answers.map((answer) => (
-                    <li className="w-full sm:w-1/2 my-0.5 px-0.5" key={answer}>
+                {questions[questionNumber].answers.map((answer, index) => (
+                    <li className="w-full sm:w-1/2 my-0.5 px-0.5" key={index}>
                         <button
                             className={`
                                     w-full h-9 rounded select-none

@@ -5,7 +5,7 @@ export type QuestionType = {
 };
 
 export type RoundData = {
-    question: QuestionType;
+    correctAnswer: string;
     userAnswer: string;
     timer: number;
 };
