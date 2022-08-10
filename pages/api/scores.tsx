@@ -4,13 +4,13 @@ import { supabase } from 'lib/initSupabase';
 import { z } from 'zod';
 
 const schema = z.object({
-    name: z.string(),
+    name: z.string().min(1),
     gameData: z
         .array(
             z.object({
                 correctAnswer: z.string(),
                 userAnswer: z.string(),
-                timer: z.number()
+                timer: z.number().min(0).max(15)
             })
         )
         .length(10)
@@ -26,7 +26,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (!request.success) {
         return res.status(400).send({
-            message: 'Invalid Payload'
+            error: {
+                message: 'Invalid payload'
+            }
         });
     }
 
@@ -44,5 +46,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         score
     });
 
-    res.status(error ? 500 : 200).end();
+    if (error) {
+        return res.status(500).send({
+            error: {
+                message: 'Error occured while saving score'
+            }
+        });
+    }
+
+    return res.status(200).end();
 }

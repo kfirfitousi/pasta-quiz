@@ -14,14 +14,26 @@ type Props = {
     initGame: () => void;
 };
 
+type ApiResponse = {
+    error?: {
+        message: string;
+    };
+};
+
 const PostGame: NextPage<Props> = ({ gameData, finalScore, initGame }: Props) => {
     const [name, setName] = useState('');
     const [submitPending, setSubmitPending] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
-    const [submitError, setSubmitError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const uploadScore = async () => {
+    const submitScore = async () => {
+        if (name === '') {
+            setErrorMessage('Please enter your name');
+            return;
+        }
+
         setSubmitPending(true);
+
         const res = await fetch(`${server}/api/scores`, {
             method: 'POST',
             body: JSON.stringify({
@@ -29,7 +41,16 @@ const PostGame: NextPage<Props> = ({ gameData, finalScore, initGame }: Props) =>
                 gameData
             })
         });
-        res.status === 200 ? setSubmitSuccess(true) : setSubmitError(true);
+
+        const { error }: ApiResponse = await res.json();
+
+        if (error) {
+            setErrorMessage(error.message);
+        } else {
+            setSubmitSuccess(true);
+            setErrorMessage('');
+        }
+
         setSubmitPending(false);
     };
 
@@ -59,18 +80,18 @@ const PostGame: NextPage<Props> = ({ gameData, finalScore, initGame }: Props) =>
                         />
                         <button
                             className="w-20 bg-yellow-300 text-yellow-800 hover:bg-yellow-800 hover:text-yellow-300 rounded"
-                            onClick={() => uploadScore()}
+                            onClick={() => submitScore()}
                             disabled={submitPending}
                         >
                             {submitPending ? <Spinner size={34} /> : 'Submit'}
                         </button>
                     </div>
                 )}
-                {submitError && (
+                {errorMessage && (
                     <p className="text-center text-yellow-800 mb-4">
                         There was an error submitting your score.
                         <br />
-                        Please try again later.
+                        Error Message: {errorMessage}
                     </p>
                 )}
             </div>
