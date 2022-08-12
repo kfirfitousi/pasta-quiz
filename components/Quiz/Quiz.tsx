@@ -32,10 +32,11 @@ const Quiz = () => {
                 answers: [
                     shape.name,
                     ...pasta.shapes
-                        .filter((s) => s.name !== shape.name)
+                        .map((s) => s.name)
+                        .filter((name) => name !== shape.name)
+                        .concat(pasta.wrongAnswers)
                         .sort(() => Math.random() - 0.5)
                         .slice(0, 3)
-                        .map((s) => s.name)
                 ].sort(() => Math.random() - 0.5),
                 correctAnswer: shape.name
             }));

@@ -344,5 +344,20 @@
             "name": "CASONCELLI",
             "imagePath": "images/86.webp"
         }
+    ],
+    "wrongAnswers": [
+        "PAPARAZZI",
+        "FALAFEL",
+        "MOZZARELLA",
+        "A LA CARTE",
+        "CAMPARI",
+        "ALBANIA",
+        "MON COEUR",
+        "BROCCOLI",
+        "ESPERANTO",
+        "REGGAETON",
+        "CROCHET",
+        "VITALY",
+        "TORTOISE"
     ]
 }
