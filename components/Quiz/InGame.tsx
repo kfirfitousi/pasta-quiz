@@ -1,10 +1,8 @@
-import type { NextPage } from 'next';
 import type { RoundData, QuestionType } from 'types';
 
 import { useCallback, useEffect, useState } from 'react';
 
 import Image from 'next/image';
-import Container from 'components/Container';
 
 type InGameProps = {
     questions: QuestionType[];
@@ -13,12 +11,7 @@ type InGameProps = {
     endGame: () => void;
 };
 
-const InGame: NextPage<InGameProps> = ({
-    questions,
-    collectRoundData,
-    setFinalScore,
-    endGame
-}: InGameProps) => {
+const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameProps) => {
     const [questionNumber, setQuestionNumber] = useState(0);
     const [userAnswer, setUserAnswer] = useState('');
     const [score, setScore] = useState(0);
@@ -77,7 +70,7 @@ const InGame: NextPage<InGameProps> = ({
     }, [timer, userAnswer, collectRoundData, endRound]);
 
     return (
-        <Container>
+        <>
             <div className="w-3/4 md:w-2/3 mx-auto flex justify-between text-center text-yellow-800 text-lg">
                 <p>{questionNumber + 1}/10</p>
                 <p>Score: {score}</p>
@@ -131,7 +124,7 @@ const InGame: NextPage<InGameProps> = ({
                     {timer.toFixed(1)}
                 </div>
             </div>
-        </Container>
+        </>
     );
 };
 

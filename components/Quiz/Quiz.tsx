@@ -3,12 +3,13 @@ import type { QuestionType, GameData, RoundData } from 'types';
 import { useState } from 'react';
 
 import { PreGame, Countdown, InGame, PostGame } from '.';
+import Container from 'components/Container';
 import Head from 'next/head';
 
 const GameStates = ['pre-game', 'countdown', 'in-game', 'post-game'] as const;
 type GameState = typeof GameStates[number];
 
-function QuizGame() {
+const Quiz = () => {
     const [questions, setQuestions] = useState<QuestionType[]>([]);
     const [gameState, setGameState] = useState<GameState>('pre-game');
     const [gameData, setGameData] = useState<GameData>([]);
@@ -57,26 +58,40 @@ function QuizGame() {
     return (
         <>
             <Head>
-                {preloads.map((preload, index) => (
-                    <link rel="preload" as="image" href={preload} key={index} />
+                {preloads.map((imagePath, index) => (
+                    <link rel="preload" as="image" href={imagePath} key={index} />
                 ))}
             </Head>
 
-            {gameState === 'pre-game' && <PreGame initGame={initGame} />}
-            {gameState === 'countdown' && <Countdown startGame={startGame} />}
-            {gameState === 'in-game' && (
-                <InGame
-                    questions={questions}
-                    collectRoundData={collectRoundData}
-                    setFinalScore={setFinalScore}
-                    endGame={endGame}
-                />
-            )}
-            {gameState === 'post-game' && (
-                <PostGame gameData={gameData} finalScore={finalScore} initGame={initGame} />
-            )}
+            <Container>
+                {(() => {
+                    switch (gameState) {
+                        case 'pre-game':
+                            return <PreGame initGame={initGame} />;
+                        case 'countdown':
+                            return <Countdown startGame={startGame} />;
+                        case 'in-game':
+                            return (
+                                <InGame
+                                    questions={questions}
+                                    collectRoundData={collectRoundData}
+                                    setFinalScore={setFinalScore}
+                                    endGame={endGame}
+                                />
+                            );
+                        case 'post-game':
+                            return (
+                                <PostGame
+                                    gameData={gameData}
+                                    finalScore={finalScore}
+                                    initGame={initGame}
+                                />
+                            );
+                    }
+                })()}
+            </Container>
         </>
     );
-}
+};
 
-export default QuizGame;
+export default Quiz;

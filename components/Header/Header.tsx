@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Container from 'components/Container';
 
-function Header() {
+const Header = () => {
     const router = useRouter();
 
     const routes = [
@@ -32,6 +32,6 @@ function Header() {
             </Container>
         </header>
     );
-}
+};
 
 export default Header;

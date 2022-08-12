@@ -1,14 +1,10 @@
-import type { NextPage } from 'next';
-
-import Container from 'components/Container';
-
 type PreGameProps = {
     initGame: () => void;
 };
 
-const PreGame: NextPage<PreGameProps> = ({ initGame }: PreGameProps) => {
+const PreGame = ({ initGame }: PreGameProps) => {
     return (
-        <Container>
+        <>
             <p className="text-xl text-center text-yellow-800 mt-44 md:mt-52">
                 Put your pasta knowledge to the test!
             </p>
@@ -24,7 +20,7 @@ const PreGame: NextPage<PreGameProps> = ({ initGame }: PreGameProps) => {
                     Play
                 </button>
             </div>
-        </Container>
+        </>
     );
 };
 

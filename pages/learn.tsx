@@ -55,6 +55,7 @@ const Learn: NextPage<LearnProps> = ({
 
 export const getStaticProps: GetStaticProps<LearnProps> = async () => {
     const pasta = await import('../data/pasta.json');
+
     return {
         props: {
             shapes: pasta.shapes

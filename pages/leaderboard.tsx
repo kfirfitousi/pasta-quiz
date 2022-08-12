@@ -61,11 +61,13 @@ const Leaderboard: NextPage<LeaderboardProps> = ({
 
 export const getServerSideProps: GetServerSideProps<LeaderboardProps> = async ({ res }) => {
     res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
+
     const { error, data } = await supabase
         .from('leaderboard')
         .select('name, score')
         .limit(10)
         .order('score', { ascending: false });
+
     return {
         props: {
             scores: error ? null : data

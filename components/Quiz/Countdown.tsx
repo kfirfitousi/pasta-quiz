@@ -1,14 +1,10 @@
-import type { NextPage } from 'next';
-
 import { useEffect, useState } from 'react';
-
-import Container from 'components/Container';
 
 type CountdownProps = {
     startGame: () => void;
 };
 
-const Countdown: NextPage<CountdownProps> = ({ startGame }: CountdownProps) => {
+const Countdown = ({ startGame }: CountdownProps) => {
     const [countdown, setCountdown] = useState(3);
 
     useEffect(() => {
@@ -21,11 +17,7 @@ const Countdown: NextPage<CountdownProps> = ({ startGame }: CountdownProps) => {
         }
     }, [countdown, startGame]);
 
-    return (
-        <Container>
-            <h1 className="text-4xl text-yellow-800 text-center mt-52 select-none">{countdown}</h1>
-        </Container>
-    );
+    return <h1 className="text-4xl text-yellow-800 text-center mt-52 select-none">{countdown}</h1>;
 };
 
 export default Countdown;

@@ -3,6 +3,12 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { supabase } from 'lib/initSupabase';
 import { z } from 'zod';
 
+type ApiResponse = {
+    error: {
+        message: string;
+    } | null;
+};
+
 const schema = z.object({
     name: z.string().min(1),
     gameData: z
@@ -15,12 +21,6 @@ const schema = z.object({
         )
         .length(10)
 });
-
-type ApiResponse = {
-    error: {
-        message: string;
-    } | null;
-};
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<ApiResponse>) {
     if (req.method !== 'POST') {

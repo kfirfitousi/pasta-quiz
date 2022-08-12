@@ -2,7 +2,7 @@ type SpinnerProps = {
     size: number;
 };
 
-function Spinner({ size }: SpinnerProps) {
+const Spinner = ({ size }: SpinnerProps) => {
     return (
         <svg
             width={`${size}px`}
@@ -145,6 +145,6 @@ function Spinner({ size }: SpinnerProps) {
             </g>
         </svg>
     );
-}
+};
 
 export default Spinner;
