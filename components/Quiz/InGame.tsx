@@ -71,12 +71,12 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
 
     return (
         <>
-            <div className="w-3/4 md:w-2/3 mx-auto flex justify-between text-center text-yellow-800 text-lg">
+            <div className="w-full sm:w-3/4 mx-auto flex justify-between text-center text-yellow-800 text-md">
                 <p>{questionNumber + 1}/10</p>
                 <p>Score: {score}</p>
             </div>
 
-            <div className="w-3/4 md:w-2/3 aspect-square mx-auto border border-solid border-yellow-500 rounded-sm relative">
+            <div className="w-full sm:w-3/4 aspect-square mx-auto border border-solid border-yellow-500 rounded-sm relative">
                 <Image
                     src={`/${questions[questionNumber].imagePath}`}
                     layout="fill"
@@ -84,12 +84,13 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
                 />
             </div>
 
-            <ul className="flex flex-row flex-wrap justify-between w-3/4 md:w-2/3 mx-auto mt-1">
+            <ul className="w-full sm:w-3/4 flex flex-row flex-wrap justify-between mx-auto mt-1">
                 {questions[questionNumber].answers.map((answer, index) => (
                     <li className="w-full sm:w-1/2 my-0.5 px-0.5" key={index}>
                         <button
                             className={`
-                                    w-full h-9 rounded select-none
+                                    w-full h-11 sm:h-9 rounded select-none text-xl 
+                                    ${answer.length > 20 ? 'sm:text-sm' : 'sm:text-lg'}
                                     ${
                                         userAnswer &&
                                         answer === questions[questionNumber].correctAnswer
@@ -103,7 +104,6 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
                                             ? 'text-yellow-100 bg-red-500'
                                             : 'text-yellow-800 bg-yellow-300 hover:text-yellow-300 hover:bg-yellow-800'
                                     }
-                                    ${answer.length > 20 ? 'text-sm' : 'text-lg'}
                                 `}
                             disabled={userAnswer !== ''}
                             onClick={() => handleAnswer(answer)}
@@ -114,9 +114,9 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
                 ))}
             </ul>
 
-            <div className="w-3/4 md:w-2/3 h-7 mx-auto mt-0.5 px-0.5">
+            <div className="w-full sm:w-3/4 px-0.5 h-9 mx-auto mt-0.5">
                 <div
-                    className="text-sm leading-7 text-center text-yellow-900 bg-[url(/images/progress.png)] bg-cover bg-no-repeat h-full"
+                    className="leading-9 text-center text-yellow-900 bg-[url(/images/progress.png)] bg-cover bg-no-repeat h-full"
                     style={{
                         backgroundSize: `${(timer * 100) / 15}% 100%`
                     }}
