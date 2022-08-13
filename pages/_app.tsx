@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import Head from 'next/head';
-import Spinner from 'components/Spinner';
+import Spinner from '~/Spinner';
 
-import '../styles/globals.css';
+import 'styles/globals.css';
 
 const PastaQuiz = ({ Component, pageProps }: AppProps) => {
     const router = useRouter();

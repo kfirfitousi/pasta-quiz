@@ -2,9 +2,12 @@ import type { QuestionType, GameData, RoundData } from 'types';
 
 import { useState } from 'react';
 
-import { PreGame, Countdown, InGame, PostGame } from '.';
-import Container from 'components/Container';
 import Head from 'next/head';
+import Container from '~/Container';
+import PreGame from './PreGame';
+import Countdown from './Countdown';
+import InGame from './InGame';
+import PostGame from './PostGame';
 
 const GameStates = ['pre-game', 'countdown', 'in-game', 'post-game'] as const;
 type GameState = typeof GameStates[number];

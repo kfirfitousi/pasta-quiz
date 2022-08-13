@@ -3,7 +3,7 @@ import type { GameData } from 'types';
 import { useState } from 'react';
 import { server } from 'config';
 
-import Spinner from 'components/Spinner';
+import Spinner from '~/Spinner';
 import Link from 'next/link';
 
 type PostGameProps = {

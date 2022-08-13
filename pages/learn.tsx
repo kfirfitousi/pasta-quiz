@@ -1,9 +1,9 @@
 import type { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
 
 import Head from 'next/head';
-import Header from 'components/Header';
-import Container from 'components/Container';
 import Image from 'next/image';
+import Header from '~/Header';
+import Container from '~/Container';
 
 type ShapeType = {
     name: string;

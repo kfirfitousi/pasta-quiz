@@ -1,9 +1,9 @@
 import type { NextPage } from 'next';
 
 import Head from 'next/head';
-import Header from 'components/Header';
-import Container from 'components/Container';
-import Quiz from 'components/Quiz';
+import Header from '~/Header';
+import Container from '~/Container';
+import Quiz from '~/Quiz';
 
 const Home: NextPage = () => {
     return (

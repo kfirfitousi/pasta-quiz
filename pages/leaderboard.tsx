@@ -1,8 +1,8 @@
 import type { NextPage, GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import Head from 'next/head';
-import Header from 'components/Header';
-import Container from 'components/Container';
+import Header from '~/Header';
+import Container from '~/Container';
 
 import { supabase } from 'lib/initSupabase';
 
