@@ -17,15 +17,17 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
     const [score, setScore] = useState(0);
     const [timer, setTimer] = useState(15);
 
+    const currentQuestion = questions[questionNumber];
+
     const handleAnswer = (answer: string) => {
         setUserAnswer(answer);
 
-        if (answer === questions[questionNumber].correctAnswer) {
+        if (answer === currentQuestion.correctAnswer) {
             setScore(Math.ceil(score + timer * 10));
         }
 
         collectRoundData({
-            correctAnswer: questions[questionNumber].correctAnswer,
+            correctAnswer: currentQuestion.correctAnswer,
             userAnswer: answer,
             timer
         });
@@ -78,29 +80,26 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
 
             <div className="w-full sm:w-3/4 aspect-square mx-auto border border-solid border-yellow-500 rounded-sm relative">
                 <Image
-                    src={`/${questions[questionNumber].imagePath}`}
+                    src={`/${currentQuestion.imagePath}`}
                     layout="fill"
                     alt="mysterious pasta shape"
                 />
             </div>
 
             <ul className="w-full sm:w-3/4 flex flex-row flex-wrap justify-between mx-auto mt-1">
-                {questions[questionNumber].answers.map((answer, index) => (
+                {currentQuestion.answers.map((answer, index) => (
                     <li className="w-full sm:w-1/2 my-0.5 px-0.5" key={index}>
                         <button
                             className={`
                                     w-full h-11 sm:h-9 rounded select-none text-xl 
                                     ${answer.length > 20 ? 'sm:text-sm' : 'sm:text-lg'}
                                     ${
-                                        userAnswer &&
-                                        answer === questions[questionNumber].correctAnswer
+                                        userAnswer && answer === currentQuestion.correctAnswer
                                             ? 'text-yellow-100 bg-green-500'
                                             : (userAnswer === answer &&
-                                                  answer !==
-                                                      questions[questionNumber].correctAnswer) ||
+                                                  answer !== currentQuestion.correctAnswer) ||
                                               (userAnswer === 'no-answer' &&
-                                                  answer !==
-                                                      questions[questionNumber].correctAnswer)
+                                                  answer !== currentQuestion.correctAnswer)
                                             ? 'text-yellow-100 bg-red-500'
                                             : 'text-yellow-800 bg-yellow-300 hover:text-yellow-300 hover:bg-yellow-800'
                                     }
