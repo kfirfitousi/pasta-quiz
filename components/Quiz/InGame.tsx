@@ -18,12 +18,19 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
     const [timer, setTimer] = useState(15);
 
     const currentQuestion = questions[questionNumber];
+    const lastQuestion = questionNumber === questions.length - 1;
 
     const handleAnswer = (answer: string) => {
         setUserAnswer(answer);
 
         if (answer === currentQuestion.correctAnswer) {
-            setScore(Math.ceil(score + timer * 10));
+            const newScore = Math.ceil(score + timer * 10);
+
+            setScore(newScore);
+
+            if (lastQuestion) {
+                setFinalScore(newScore);
+            }
         }
 
         collectRoundData({
@@ -32,44 +39,43 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
             timer
         });
 
-        setTimeout(() => {
-            endRound();
-        }, 1000);
+        setTimeout(endRound, 1000);
     };
 
     const endRound = useCallback(() => {
-        if (questionNumber + 1 < questions.length) {
-            setUserAnswer('');
-            setQuestionNumber(questionNumber + 1);
-            setTimer(15);
-        } else {
+        if (lastQuestion) {
             endGame();
+        } else {
+            setUserAnswer('');
+            setQuestionNumber((prev) => prev + 1);
+            setTimer(15);
         }
-    }, [questionNumber, questions.length, endGame]);
+    }, [lastQuestion, endGame]);
 
-    useEffect(() => setFinalScore(score), [setFinalScore, score]);
-
+    // creates interval for timer that decrements it
+    // as long as no answer is given by the user
     useEffect(() => {
-        if (timer > 0 && !userAnswer) {
-            setTimeout(() => {
-                if (timer >= 0.1) {
-                    setTimer(timer - 0.1);
-                } else {
-                    setUserAnswer('no-answer');
+        const interval = setInterval(() => {
+            setTimer((prev) => (userAnswer ? prev : prev - 0.1));
+        }, 100);
 
-                    collectRoundData({
-                        correctAnswer: '',
-                        userAnswer: 'no-answer',
-                        timer: 0
-                    });
+        return () => clearInterval(interval);
+    }, [userAnswer]);
 
-                    setTimeout(() => {
-                        endRound();
-                    }, 1000);
-                }
-            }, 100);
+    // ends the round when timer reaches 0
+    useEffect(() => {
+        if (timer <= 0.1) {
+            setUserAnswer('no-answer');
+
+            collectRoundData({
+                correctAnswer: '',
+                userAnswer: 'no-answer',
+                timer: 0
+            });
+
+            setTimeout(endRound, 1000);
         }
-    }, [timer, userAnswer, collectRoundData, endRound]);
+    }, [timer, collectRoundData, endRound]);
 
     return (
         <>

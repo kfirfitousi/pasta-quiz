@@ -8,11 +8,15 @@ const Countdown = ({ startGame }: CountdownProps) => {
     const [countdown, setCountdown] = useState(3);
 
     useEffect(() => {
-        if (countdown > 0) {
-            setTimeout(() => {
-                setCountdown(countdown - 1);
-            }, 1000);
-        } else {
+        const interval = setInterval(() => {
+            setCountdown((prev) => prev - 1);
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    useEffect(() => {
+        if (countdown <= 0) {
             startGame();
         }
     }, [countdown, startGame]);
