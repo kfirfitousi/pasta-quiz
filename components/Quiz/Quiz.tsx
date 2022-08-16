@@ -2,7 +2,6 @@ import type { QuestionType, GameData, RoundData } from 'types';
 
 import { useState } from 'react';
 
-import Head from 'next/head';
 import Container from '~/Container';
 import PreGame from './PreGame';
 import Countdown from './Countdown';
@@ -17,7 +16,6 @@ const Quiz = () => {
     const [gameState, setGameState] = useState<GameState>('pre-game');
     const [gameData, setGameData] = useState<GameData>([]);
     const [finalScore, setFinalScore] = useState(0);
-    const [preloads, setPreloads] = useState<string[]>([]);
 
     const initGame = async () => {
         await fetchQuestions();
@@ -44,7 +42,6 @@ const Quiz = () => {
                 correctAnswer: shape.name
             }));
         setQuestions(questions);
-        setPreloads(questions.map((question) => question.imagePath));
     };
 
     const collectRoundData = (roundData: RoundData) => {
@@ -61,12 +58,6 @@ const Quiz = () => {
 
     return (
         <>
-            <Head>
-                {preloads.map((imagePath, index) => (
-                    <link rel="preload" as="image" href={imagePath} key={index} />
-                ))}
-            </Head>
-
             <Container>
                 {(() => {
                     switch (gameState) {

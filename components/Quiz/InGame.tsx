@@ -1,6 +1,6 @@
 import type { RoundData, QuestionType } from 'types';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 
@@ -17,55 +17,63 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
     const [score, setScore] = useState(0);
     const [timer, setTimer] = useState(15);
 
+    const isTimerActive = useRef(true);
+
     const currentQuestion = questions[questionNumber];
-    const lastQuestion = questionNumber === questions.length - 1;
+    const isLastQuestion = questionNumber === questions.length - 1;
 
     const handleAnswer = (answer: string) => {
         setUserAnswer(answer);
+        isTimerActive.current = false;
+
+        let newScore = score;
 
         if (answer === currentQuestion.correctAnswer) {
-            const newScore = Math.ceil(score + timer * 10);
-
+            newScore = Math.ceil(score + timer * 10);
             setScore(newScore);
+        }
 
-            if (lastQuestion) {
-                setFinalScore(newScore);
-            }
+        if (isLastQuestion) {
+            setFinalScore(newScore);
         }
 
         collectRoundData({
             correctAnswer: currentQuestion.correctAnswer,
             userAnswer: answer,
-            timer
+            timer: timer
         });
 
         setTimeout(endRound, 1000);
     };
 
     const endRound = useCallback(() => {
-        if (lastQuestion) {
+        if (isLastQuestion) {
             endGame();
         } else {
             setUserAnswer('');
             setQuestionNumber((prev) => prev + 1);
             setTimer(15);
+            isTimerActive.current = true;
         }
-    }, [lastQuestion, endGame]);
+    }, [isLastQuestion, endGame]);
 
-    // creates interval for timer that decrements it
-    // as long as no answer is given by the user
+    // creates interval that decrememnts timer every 0.1 seconds
+    // as long as isTimerActive is true
     useEffect(() => {
         const interval = setInterval(() => {
-            setTimer((prev) => (userAnswer ? prev : prev - 0.1));
+            if (isTimerActive.current) {
+                setTimer((prev) => prev - 0.1);
+            }
         }, 100);
 
         return () => clearInterval(interval);
-    }, [userAnswer]);
+    }, []);
 
     // ends the round when timer reaches 0
     useEffect(() => {
-        if (timer <= 0.1) {
+        if (timer < 0.1) {
             setUserAnswer('no-answer');
+            isTimerActive.current = false;
 
             collectRoundData({
                 correctAnswer: '',
@@ -75,7 +83,8 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
 
             setTimeout(endRound, 1000);
         }
-    }, [timer, collectRoundData, endRound]);
+        // eslint-disable-next-line
+    }, [timer]);
 
     return (
         <>
