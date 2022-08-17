@@ -1,8 +1,6 @@
 import type { NextPage, GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
-import Head from 'next/head';
-import Header from '~/Header';
-import Container from '~/Container';
+import Layout from '~/Layout';
 
 import { supabase } from 'lib/initSupabase';
 
@@ -19,19 +17,12 @@ const Leaderboard: NextPage<LeaderboardProps> = ({
     scores
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     return (
-        <Container>
-            <Head>
-                <title>Pasta Quiz | Leaderboard</title>
-                <meta
-                    name="description"
-                    content="Put your Pasta knowledge to the test! 
-                    How many pasta shapes can you recognize?
-                    Check the leaderboard to see the current high scores."
-                />
-            </Head>
-
-            <Header />
-
+        <Layout
+            title="Pasta Quiz | Leaderboard"
+            description="Put your Pasta knowledge to the test! 
+            How many pasta shapes can you recognize?
+            Check the leaderboard to see the current high scores."
+        >
             {scores ? (
                 <div className="flex flex-col items-center mt-5 text-yellow-800">
                     <div className="flex flex-row text-center md:h-8">
@@ -54,7 +45,7 @@ const Leaderboard: NextPage<LeaderboardProps> = ({
                     Error fetching leaderboard from database.
                 </div>
             )}
-        </Container>
+        </Layout>
     );
 };
 

@@ -1,27 +1,18 @@
 import type { NextPage } from 'next';
 
-import Head from 'next/head';
-import Header from '~/Header';
-import Container from '~/Container';
+import Layout from '~/Layout';
 import Quiz from '~/Quiz';
 
 const Home: NextPage = () => {
     return (
-        <Container>
-            <Head>
-                <title>Pasta Quiz</title>
-                <meta
-                    name="description"
-                    content="Put your Pasta knowledge to the test! 
-                    How many pasta shapes can you recognize?
-                    Take the quiz or learn more about pasta shapes."
-                />
-            </Head>
-
-            <Header />
-
+        <Layout
+            title="Pasta Quiz"
+            description="Put your Pasta knowledge to the test! 
+        How many pasta shapes can you recognize?
+        Take the quiz or learn more about pasta shapes."
+        >
             <Quiz />
-        </Container>
+        </Layout>
     );
 };
 

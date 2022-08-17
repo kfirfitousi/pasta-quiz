@@ -103,9 +103,10 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
                 <p>Score: {score}</p>
             </div>
 
-            <div className="w-full sm:w-3/4 aspect-square mx-auto border border-solid border-yellow-500 rounded-sm relative">
+            <div className="w-full sm:w-3/4 aspect-square mx-auto border border-solid border-yellow-500 rounded relative">
                 <Image
                     src={`/${currentQuestion.imagePath}`}
+                    className="rounded"
                     layout="fill"
                     alt="mysterious pasta shape"
                     onLoadingComplete={() => setIsImgLoaded(true)}

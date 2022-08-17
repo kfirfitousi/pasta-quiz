@@ -1,9 +1,7 @@
 import type { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
 
-import Head from 'next/head';
+import Layout from '~/Layout';
 import Image from 'next/image';
-import Header from '~/Header';
-import Container from '~/Container';
 
 type ShapeType = {
     name: string;
@@ -18,19 +16,12 @@ const Learn: NextPage<LearnProps> = ({
     shapes
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
-        <Container>
-            <Head>
-                <title>Pasta Quiz | Learn</title>
-                <meta
-                    name="description"
-                    content="Put your Pasta knowledge to the test! 
-                    How many pasta shapes can you recognize?
-                    Learn about pasta shapes here."
-                />
-            </Head>
-
-            <Header />
-
+        <Layout
+            title="Pasta Quiz | Learn"
+            description="Put your Pasta knowledge to the test! 
+        How many pasta shapes can you recognize?
+        Learn about pasta shapes here."
+        >
             <div className="flex flex-wrap justify-center">
                 {shapes.map((shape, index) => (
                     <div key={index} className="w-2/3 sm:w-1/2 lg:w-1/3 p-2">
@@ -48,7 +39,7 @@ const Learn: NextPage<LearnProps> = ({
                     </div>
                 ))}
             </div>
-        </Container>
+        </Layout>
     );
 };
 
