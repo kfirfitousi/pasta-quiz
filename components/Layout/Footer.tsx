@@ -40,7 +40,7 @@ const Footer = () => {
                 <span className="mb-4">
                     Source code available on&nbsp;
                     <a
-                        href="https://github.com/kfirfitousi/portfolio"
+                        href="https://github.com/kfirfitousi/pasta-quiz"
                         className="underline hover:text-yellow-600"
                         target="_blank"
                         rel="noreferrer"
