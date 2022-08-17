@@ -1,6 +1,6 @@
 import type { RoundData, QuestionType } from 'types';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 
@@ -16,6 +16,7 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
     const [userAnswer, setUserAnswer] = useState('');
     const [score, setScore] = useState(0);
     const [timer, setTimer] = useState(15);
+    const [isImgLoaded, setIsImgLoaded] = useState(false);
 
     const isTimerActive = useRef(true);
 
@@ -46,16 +47,24 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
         setTimeout(endRound, 1000);
     };
 
-    const endRound = useCallback(() => {
+    const endRound = () => {
         if (isLastQuestion) {
             endGame();
         } else {
-            setUserAnswer('');
-            setQuestionNumber((prev) => prev + 1);
-            setTimer(15);
-            isTimerActive.current = true;
+            setIsImgLoaded(false);
+            // check if image is loaded every half a second.
+            // when image is loaded, start the next round
+            const interval = setInterval(() => {
+                if (isImgLoaded) {
+                    setUserAnswer('');
+                    setQuestionNumber((prev) => prev + 1);
+                    setTimer(15);
+                    isTimerActive.current = true;
+                    clearInterval(interval);
+                }
+            }, 500);
         }
-    }, [isLastQuestion, endGame]);
+    };
 
     // creates interval that decrememnts timer every 0.1 seconds
     // as long as isTimerActive is true
@@ -98,6 +107,7 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
                     src={`/${currentQuestion.imagePath}`}
                     layout="fill"
                     alt="mysterious pasta shape"
+                    onLoadingComplete={() => setIsImgLoaded(true)}
                 />
             </div>
 
