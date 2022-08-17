@@ -27,7 +27,6 @@ const Learn: NextPage<LearnProps> = ({
                     How many pasta shapes can you recognize?
                     Learn about pasta shapes here."
                 />
-                <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <Header />
@@ -54,7 +53,7 @@ const Learn: NextPage<LearnProps> = ({
 };
 
 export const getStaticProps: GetStaticProps<LearnProps> = async () => {
-    const pasta = await import('../data/pasta.json');
+    const pasta = await import('data/pasta.json');
 
     return {
         props: {

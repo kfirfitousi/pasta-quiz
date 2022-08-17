@@ -1,10 +1,12 @@
+import Container from '~/Container';
+
 type PreGameProps = {
     initGame: () => void;
 };
 
 const PreGame = ({ initGame }: PreGameProps) => {
     return (
-        <>
+        <Container>
             <p className="text-xl text-center text-yellow-800 mt-44 md:mt-52">
                 Put your pasta knowledge to the test!
             </p>
@@ -20,7 +22,7 @@ const PreGame = ({ initGame }: PreGameProps) => {
                     Play
                 </button>
             </div>
-        </>
+        </Container>
     );
 };
 

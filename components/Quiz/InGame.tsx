@@ -3,6 +3,7 @@ import type { RoundData, QuestionType } from 'types';
 import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
+import Container from '~/Container';
 
 type InGameProps = {
     questions: QuestionType[];
@@ -96,7 +97,7 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
     }, [timer]);
 
     return (
-        <>
+        <Container>
             <div className="w-full sm:w-3/4 mx-auto flex justify-between text-center text-yellow-800 text-md">
                 <p>{questionNumber + 1}/10</p>
                 <p>Score: {score}</p>
@@ -148,7 +149,7 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
                     {timer.toFixed(1)}
                 </div>
             </div>
-        </>
+        </Container>
     );
 };
 

@@ -16,7 +16,6 @@ const Home: NextPage = () => {
                     How many pasta shapes can you recognize?
                     Take the quiz or learn more about pasta shapes."
                 />
-                <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <Header />

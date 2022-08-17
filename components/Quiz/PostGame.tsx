@@ -1,8 +1,10 @@
 import type { GameData } from 'types';
 
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
+import { submitReducer, initialSubmitState } from 'lib/submitReducer';
 import { server } from 'config';
 
+import Container from '~/Container';
 import Spinner from '~/Spinner';
 import Link from 'next/link';
 
@@ -20,19 +22,18 @@ type ApiResponse = {
 
 const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
     const [name, setName] = useState('');
-    const [submitPending, setSubmitPending] = useState(false);
-    const [submitSuccess, setSubmitSuccess] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
 
-    const submitScore = async () => {
+    const [submitStatus, dispatch] = useReducer(submitReducer, initialSubmitState);
+
+    const handleSubmit = async () => {
         if (name === '') {
-            setErrorMessage('Please enter your name');
+            dispatch({ type: 'error', message: 'Please enter your name' });
             return;
         }
 
-        setSubmitPending(true);
+        dispatch({ type: 'submit' });
 
-        const res = await fetch(`${server}/api/scores`, {
+        const response = await fetch(`${server}/api/scores`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -41,26 +42,23 @@ const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
             })
         });
 
-        const { error }: ApiResponse = await res.json();
+        const { error }: ApiResponse = await response.json();
 
         if (error) {
-            setErrorMessage(error.message);
+            dispatch({ type: 'error', message: error.message });
         } else {
-            setSubmitSuccess(true);
-            setErrorMessage('');
+            dispatch({ type: 'success' });
         }
-
-        setSubmitPending(false);
     };
 
     return (
-        <>
+        <Container>
             <h2 className="text-lg text-yellow-800 text-center mt-32 mb-2">
                 You scored {finalScore} points!
             </h2>
 
             <div className="w-2/3 mx-auto">
-                {submitSuccess ? (
+                {submitStatus.success ? (
                     <p className="text-center text-yellow-800 mb-4">
                         Your score has been submitted to the&nbsp;
                         <Link href="/leaderboard">
@@ -77,14 +75,14 @@ const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
-                        {submitPending ? (
+                        {submitStatus.pending ? (
                             <button className="w-20 bg-yellow-300 text-yellow-800 rounded" disabled>
                                 <Spinner size={34} />
                             </button>
                         ) : (
                             <button
                                 className="w-20 bg-yellow-300 text-yellow-800 hover:bg-yellow-800 hover:text-yellow-300 rounded"
-                                onClick={() => submitScore()}
+                                onClick={() => handleSubmit()}
                             >
                                 Submit
                             </button>
@@ -92,11 +90,11 @@ const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
                     </div>
                 )}
 
-                {errorMessage ? (
+                {submitStatus.errorMessage ? (
                     <p className="text-center text-yellow-800 mb-4">
                         There was an error submitting your score.
                         <br />
-                        Error Message: {errorMessage}
+                        Error Message: {submitStatus.errorMessage}
                     </p>
                 ) : null}
             </div>
@@ -109,7 +107,7 @@ const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
                     Play Again
                 </button>
             </div>
-        </>
+        </Container>
     );
 };
 

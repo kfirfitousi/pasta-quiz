@@ -132,7 +132,7 @@ const Spinner = ({ size }: SpinnerProps) => {
                 </rect>
             </g>
             <g transform="rotate(327.27272727272725 50 50)">
-                <rect x="46.5" y="26.5" rx="3.5" ry="3.5" width="7" height="7" fill="#854d0e">
+                <rect x="46.5" y="26.5" rx="3.5" ry="3.5" width="7" height="7">
                     <animate
                         attributeName="opacity"
                         values="1;0"

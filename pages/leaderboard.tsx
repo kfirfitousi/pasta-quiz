@@ -28,7 +28,6 @@ const Leaderboard: NextPage<LeaderboardProps> = ({
                     How many pasta shapes can you recognize?
                     Check the leaderboard to see the current high scores."
                 />
-                <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <Header />

@@ -6,11 +6,11 @@ import Container from '~/Container';
 const Header = () => {
     const router = useRouter();
 
-    const routes = [
+    const routes: [string, string][] = [
         ['/', 'Play'],
         ['/learn', 'Learn'],
         ['/leaderboard', 'Leaderboard']
-    ] as const;
+    ];
 
     return (
         <header className="py-6 text-yellow-800 select-none">
