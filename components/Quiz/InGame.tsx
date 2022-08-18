@@ -3,7 +3,6 @@ import type { RoundData, QuestionType } from 'types';
 import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
-import Container from '~/Container';
 
 type InGameProps = {
     questions: QuestionType[];
@@ -97,13 +96,13 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
     }, [timer]);
 
     return (
-        <Container>
-            <div className="w-full sm:w-3/4 mx-auto flex justify-between text-center text-yellow-800 text-md">
+        <section className="flex flex-col justify-center items-center h-full">
+            <div className="w-full sm:w-3/4 flex justify-between text-center text-yellow-800 text-md">
                 <p>{questionNumber + 1}/10</p>
                 <p>Score: {score}</p>
             </div>
 
-            <div className="w-full sm:w-3/4 aspect-square mx-auto border border-solid border-yellow-500 rounded relative">
+            <div className="w-full sm:w-3/4 aspect-square border border-solid border-yellow-500 rounded relative">
                 <Image
                     src={`/${currentQuestion.imagePath}`}
                     className="rounded"
@@ -113,7 +112,7 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
                 />
             </div>
 
-            <ul className="w-full sm:w-3/4 flex flex-row flex-wrap justify-between mx-auto mt-1">
+            <ul className="w-full sm:w-3/4 flex flex-row flex-wrap justify-between mt-1">
                 {currentQuestion.answers.map((answer, index) => (
                     <li className="w-full sm:w-1/2 my-0.5 px-0.5" key={index}>
                         <button
@@ -150,7 +149,7 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
                     {timer.toFixed(1)}
                 </div>
             </div>
-        </Container>
+        </section>
     );
 };
 

@@ -29,6 +29,7 @@ const Leaderboard: NextPage<LeaderboardProps> = ({
                         <p className="w-52 md:w-80 md:leading-8 md:text-lg">Name</p>
                         <p className="w-20 md:leading-8 md:text-lg">Score</p>
                     </div>
+                    
                     {scores.map((player, index) => (
                         <div key={index} className="flex flex-row text-center md:h-8">
                             <p className="w-52 md:w-80 md:leading-8 md:text-lg bg-yellow-200 border-b border-solid border-yellow-300 select-all">

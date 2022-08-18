@@ -19,8 +19,8 @@ const Learn: NextPage<LearnProps> = ({
         <Layout
             title="Pasta Quiz | Learn"
             description="Put your Pasta knowledge to the test! 
-        How many pasta shapes can you recognize?
-        Learn about pasta shapes here."
+            How many pasta shapes can you recognize?
+            Learn about pasta shapes here."
         >
             <div className="flex flex-wrap justify-center">
                 {shapes.map((shape, index) => (
@@ -33,6 +33,7 @@ const Learn: NextPage<LearnProps> = ({
                                 className="rounded-t"
                             />
                         </div>
+                        
                         <h2 className="h-8 leading-8 text-lg text-center bg-yellow-300 text-yellow-800 rounded-b">
                             {shape.name}
                         </h2>

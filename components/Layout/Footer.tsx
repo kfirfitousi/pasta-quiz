@@ -8,9 +8,9 @@ const badgeLoader: ImageLoader = ({ src, width, quality }) => {
 const Footer = () => {
     return (
         <footer>
-            <div className="flex flex-col text-center text-yellow-800">
-                <span className="mb-2 md:mr-2 md:mb-0 w-full md:w-auto">Built with</span>
-                <div className="flex flex-row flex-wrap md:flex-nowrap justify-center items-center mx-auto my-2">
+            <div className="flex flex-col text-xs md:text-sm text-center text-yellow-800">
+                <span className="w-full">Built with</span>
+                <div className="flex flex-row flex-nowrap justify-center items-center mx-auto my-2">
                     <Image
                         src="react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"
                         loader={badgeLoader}
