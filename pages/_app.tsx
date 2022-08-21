@@ -1,14 +1,12 @@
 import type { AppProps } from 'next/app';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 
 import Spinner from '~/Spinner';
 
 import 'styles/globals.css';
 
-const PastaQuiz = ({ Component, pageProps }: AppProps) => {
-    const router = useRouter();
+const PastaQuiz = ({ Component, pageProps, router }: AppProps) => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
