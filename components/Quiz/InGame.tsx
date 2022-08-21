@@ -114,7 +114,7 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
 
             <ul className="w-full sm:w-3/4 flex flex-row flex-wrap justify-between mt-1">
                 {currentQuestion.answers.map((answer, index) => (
-                    <li className="w-full sm:w-1/2 my-0.5 px-0.5" key={index}>
+                    <li className="w-full sm:w-1/2 my-0.5 px-0.5" key={`${index}${questionNumber}`}>
                         <button
                             className={`
                                     w-full h-11 sm:h-9 rounded select-none text-xl 
