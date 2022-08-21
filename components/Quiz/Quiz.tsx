@@ -1,7 +1,6 @@
 import type { QuestionType, GameData, RoundData } from 'types';
 
 import { useState } from 'react';
-import { server } from 'config';
 
 import PreGame from './PreGame';
 import Countdown from './Countdown';
@@ -21,7 +20,7 @@ const Quiz = () => {
     const [finalScore, setFinalScore] = useState(0);
 
     const initGame = async () => {
-        const response = await fetch(`${server}/api/questions`);
+        const response = await fetch(`/api/questions`);
         const data: ApiResponse = await response.json();
         setQuestions(data.questions);
         setGameData([]);

@@ -2,7 +2,6 @@ import type { GameData } from 'types';
 
 import { useState, useReducer } from 'react';
 import { submitReducer, initialSubmitState } from 'lib/submitReducer';
-import { server } from 'config';
 
 import Spinner from '~/Spinner';
 import Link from 'next/link';
@@ -32,7 +31,7 @@ const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
 
         dispatch({ type: 'submit' });
 
-        const response = await fetch(`${server}/api/scores`, {
+        const response = await fetch(`/api/scores`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
