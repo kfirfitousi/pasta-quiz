@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import type { Score } from 'types';
 
 import { supabase } from 'lib/initSupabase';
 import { z } from 'zod';
@@ -15,11 +16,6 @@ const schema = z.object({
         )
         .length(10)
 });
-
-type Score = {
-    name: string;
-    score: number;
-};
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     switch (req.method) {
@@ -48,6 +44,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             const { name, gameData } = request.data;
 
+            // calculate score based on game data
             const score = gameData.reduce((total, round) => {
                 return round.answer === round.correctAnswer
                     ? Math.ceil(total + round.timer * 10)

@@ -3,13 +3,13 @@ import type { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
 import Layout from '~/Layout';
 import Image from 'next/image';
 
-type ShapeType = {
+type Shape = {
     name: string;
     imagePath: string;
 };
 
 type LearnProps = {
-    shapes: ShapeType[];
+    shapes: Shape[];
 };
 
 const Learn: NextPage<LearnProps> = ({
@@ -22,21 +22,23 @@ const Learn: NextPage<LearnProps> = ({
             How many pasta shapes can you recognize?
             Learn about pasta shapes here."
         >
-            <div className="flex flex-wrap justify-center mt-5">
+            <div className="flex flex-row flex-wrap justify-center mt-5">
                 {shapes.map((shape, index) => (
-                    <div key={index} className="w-2/3 sm:w-1/2 lg:w-1/3 p-2">
-                        <div className="w-full aspect-square object-cover relative">
-                            <Image
-                                src={`/${shape.imagePath}`}
-                                alt={shape.name}
-                                layout="fill"
-                                className="rounded-t"
-                            />
-                        </div>
+                    <div key={index} className="p-3 max-w-xs basis-4/5 sm:basis-1/2 lg:basis-1/3">
+                        <div className="flex flex-col w-full aspect-square rounded-b shadow-sm">
+                            <div className="flex-shrink w-full h-full object-cover relative">
+                                <Image
+                                    src={shape.imagePath}
+                                    alt={shape.name}
+                                    layout="fill"
+                                    className="rounded-t"
+                                />
+                            </div>
 
-                        <h2 className="h-8 leading-8 text-lg text-center bg-yellow-300 text-yellow-800 rounded-b">
-                            {shape.name}
-                        </h2>
+                            <h2 className="leading-10 text-xl text-center bg-yellow-300 text-yellow-800 rounded-b">
+                                {shape.name}
+                            </h2>
+                        </div>
                     </div>
                 ))}
             </div>

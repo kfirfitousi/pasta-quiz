@@ -4,6 +4,11 @@ export type Question = {
     correctAnswer: string;
 };
 
+type Score = {
+    name: string;
+    score: number;
+};
+
 export type RoundData = {
     correctAnswer: string;
     answer: string;

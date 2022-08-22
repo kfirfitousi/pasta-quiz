@@ -1,15 +1,15 @@
-import { useMutation } from '@tanstack/react-query';
-import { axios } from 'lib/axios';
-import { MutationConfig, queryClient } from 'lib/react-query';
-
 import type { GameData } from 'types';
 
-type SubmitScoreDTO = {
+import { useMutation } from '@tanstack/react-query';
+import { MutationConfig, queryClient } from 'lib/react-query';
+import { axios } from 'lib/axios';
+
+type SubmitParams = {
     name: string;
     gameData: GameData;
 };
 
-export const submitScore = ({ name, gameData }: SubmitScoreDTO) => {
+export const submitScore = ({ name, gameData }: SubmitParams) => {
     return axios.post('/api/scores', {
         name,
         gameData

@@ -1,12 +1,8 @@
+import type { ExtractFnReturnType, QueryConfig } from 'lib/react-query';
+import type { Score } from 'types';
+
 import { useQuery } from '@tanstack/react-query';
 import { axios } from 'lib/axios';
-
-import type { ExtractFnReturnType, QueryConfig } from 'lib/react-query';
-
-type Score = {
-    name: string;
-    score: number;
-};
 
 export const getLeaderboard = (limit = 10): Promise<Score[]> => {
     return axios.get('/api/scores', {

@@ -23,8 +23,6 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
     const isLastQuestion = questionNumber === questions.length - 1;
 
     const handleAnswer = (answer: string) => {
-        // const { correctAnswer } = currentQuestion;
-
         setUserAnswer(answer);
         isTimerActive.current = false;
 
@@ -90,16 +88,18 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
 
     return (
         <>
-            <div className="w-full sm:w-3/4 flex justify-between text-center text-yellow-800 text-md">
+            <div className="w-64 sm:w-3/4 flex justify-between text-center text-yellow-800 text-md">
                 <p>{questionNumber + 1}/10</p>
                 <p>Score: {score}</p>
             </div>
 
-            <div className="w-full sm:w-3/4 aspect-square border border-solid border-yellow-500 rounded relative">
+            <div className="w-64 sm:w-3/4 aspect-square border border-solid border-yellow-500 rounded relative">
                 {questions.map((question, index) => (
                     <Image
-                        src={`/${question.imagePath}`}
-                        className={`rounded ${index === questionNumber ? 'visible' : 'invisible'}`}
+                        src={question.imagePath}
+                        className={`w-20 rounded ${
+                            index === questionNumber ? 'visible' : 'invisible'
+                        }`}
                         layout="fill"
                         alt="mysterious pasta shape"
                         key={index}
@@ -107,7 +107,7 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
                 ))}
             </div>
 
-            <ul className="w-full sm:w-3/4 flex flex-row flex-wrap justify-between mt-1">
+            <ul className="w-64 sm:w-3/4 flex flex-row flex-wrap justify-between mt-1">
                 {answers.map((answer, index) => (
                     <li className="w-full sm:w-1/2 my-0.5 px-0.5" key={`${index}${questionNumber}`}>
                         <button
@@ -133,7 +133,7 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
                 ))}
             </ul>
 
-            <div className="w-full sm:w-3/4 px-0.5 h-9 mx-auto mt-0.5">
+            <div className="w-64 sm:w-3/4 px-0.5 h-9 mx-auto mt-0.5">
                 <div
                     className="leading-9 text-center text-yellow-900 bg-[url(/images/progress.png)] bg-cover bg-no-repeat h-full"
                     style={{

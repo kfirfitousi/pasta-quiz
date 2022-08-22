@@ -12,17 +12,19 @@ type GameState = 'pre-game' | 'countdown' | 'in-game' | 'post-game';
 
 const Quiz = () => {
     const [gameState, setGameState] = useState<GameState>('pre-game');
-    const [gameData, setGameData] = useState<GameData>([]);
     const [finalScore, setFinalScore] = useState(0);
+    const [gameData, setGameData] = useState<GameData>([]);
 
     const { data, isError, isSuccess, refetch } = useQuestions();
 
+    /** fetches new questions, resets collected game data and begins countdown */
     const initGame = async () => {
-        await refetch();
+        await refetch(); // get new questions
         setGameData([]);
         setGameState('countdown');
     };
 
+    /** collects game data which will be sent as evidence when submitting score */
     const collectRoundData = (roundData: RoundData) => {
         setGameData([...gameData, roundData]);
     };
