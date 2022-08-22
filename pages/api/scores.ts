@@ -3,64 +3,73 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { supabase } from 'lib/initSupabase';
 import { z } from 'zod';
 
-type ApiResponse = {
-    error: {
-        message: string;
-    } | null;
-};
-
 const schema = z.object({
     name: z.string().min(1),
     gameData: z
         .array(
             z.object({
                 correctAnswer: z.string(),
-                userAnswer: z.string(),
+                answer: z.string(),
                 timer: z.number().min(0).max(15)
             })
         )
         .length(10)
 });
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<ApiResponse>) {
-    if (req.method !== 'POST') {
-        res.setHeader('Allow', ['POST']);
-        return res.status(405).end(`Method ${req.method} Not Allowed`);
-    }
+type Score = {
+    name: string;
+    score: number;
+};
 
-    const request = schema.safeParse(req.body);
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    switch (req.method) {
+        case 'GET': {
+            const limit = req.query.limit ? parseInt(req.query.limit as string) : 10;
 
-    if (!request.success) {
-        return res.status(400).json({
-            error: {
-                message: 'Invalid payload'
+            const { error, data } = await supabase
+                .from<Score>('leaderboard')
+                .select('name, score')
+                .order('score', { ascending: false })
+                .limit(limit);
+
+            if (error) {
+                return res.status(500).end('Error occured while fetching leaderboard');
             }
-        });
-    }
 
-    const { name, gameData } = request.data;
+            return res.status(200).json(data);
+        }
 
-    const score = gameData.reduce((total, round) => {
-        return round.userAnswer === round.correctAnswer
-            ? Math.ceil(total + round.timer * 10)
-            : total;
-    }, 0);
+        case 'POST': {
+            const request = schema.safeParse(req.body);
 
-    const { error } = await supabase.from('leaderboard').insert({
-        id: Date.now(),
-        name,
-        score
-    });
-
-    if (error) {
-        return res.status(500).json({
-            error: {
-                message: 'Error occured while saving score'
+            if (!request.success) {
+                return res.status(400).end('Invalid payload');
             }
-        });
-    }
 
-    return res.status(200).json({
-        error: null
-    });
+            const { name, gameData } = request.data;
+
+            const score = gameData.reduce((total, round) => {
+                return round.answer === round.correctAnswer
+                    ? Math.ceil(total + round.timer * 10)
+                    : total;
+            }, 0);
+
+            const { error } = await supabase.from('leaderboard').insert({
+                id: Date.now(),
+                name,
+                score
+            });
+
+            if (error) {
+                return res.status(500).end('Error occured while saving score');
+            }
+
+            return res.status(200).end();
+        }
+
+        default: {
+            res.setHeader('Allow', ['GET', 'POST']);
+            return res.status(405).end(`Method ${req.method} Not Allowed`);
+        }
+    }
 }

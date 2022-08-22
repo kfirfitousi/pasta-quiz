@@ -1,4 +1,4 @@
-export type QuestionType = {
+export type Question = {
     imagePath: string;
     answers: string[];
     correctAnswer: string;
@@ -6,7 +6,7 @@ export type QuestionType = {
 
 export type RoundData = {
     correctAnswer: string;
-    userAnswer: string;
+    answer: string;
     timer: number;
 };
 

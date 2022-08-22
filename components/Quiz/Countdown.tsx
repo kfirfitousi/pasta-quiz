@@ -21,11 +21,7 @@ const Countdown = ({ startGame }: CountdownProps) => {
         }
     }, [countdown, startGame]);
 
-    return (
-        <section className="h-full flex flex-col justify-center">
-            <h1 className="text-8xl text-yellow-800 text-center mb-20 select-none">{countdown}</h1>
-        </section>
-    );
+    return <h1 className="text-8xl text-yellow-800 text-center mb-20 select-none">{countdown}</h1>;
 };
 
 export default Countdown;

@@ -1,6 +1,8 @@
 import type { AppProps } from 'next/app';
 
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Hydrate, QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from 'lib/react-query';
 
 import Spinner from '~/Spinner';
 
@@ -29,15 +31,17 @@ const PastaQuiz = ({ Component, pageProps, router }: AppProps) => {
     }, [router]);
 
     return (
-        <>
-            {isLoading ? (
-                <div className="w-screen h-20 absolute inset-y-12 sm:inset-0 z-100 flex items-center text-yellow-800">
-                    <Spinner size={80} />
-                </div>
-            ) : null}
+        <QueryClientProvider client={queryClient}>
+            <Hydrate state={pageProps.dehydratedState}>
+                {isLoading ? (
+                    <div className="w-full h-20 absolute z-10 flex items-center inset-y-12 sm:inset-0 text-yellow-800">
+                        <Spinner size="lg" />
+                    </div>
+                ) : null}
 
-            <Component {...pageProps} />
-        </>
+                <Component {...pageProps} />
+            </Hydrate>
+        </QueryClientProvider>
     );
 };
 

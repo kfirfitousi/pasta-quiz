@@ -1,5 +1,6 @@
-import Image from 'next/image';
 import type { ImageLoader } from 'next/image';
+
+import Image from 'next/image';
 
 const badgeLoader: ImageLoader = ({ src, width, quality }) => {
     return `https://img.shields.io/badge/${src}&w=${width}&q=${quality || 75}`;

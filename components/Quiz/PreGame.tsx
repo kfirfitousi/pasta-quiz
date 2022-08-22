@@ -4,7 +4,7 @@ type PreGameProps = {
 
 const PreGame = ({ initGame }: PreGameProps) => {
     return (
-        <section className="h-full flex flex-col justify-center">
+        <>
             <p className="text-xl text-center text-yellow-800">
                 Put your pasta knowledge to the test!
             </p>
@@ -20,7 +20,7 @@ const PreGame = ({ initGame }: PreGameProps) => {
                     Play
                 </button>
             </div>
-        </section>
+        </>
     );
 };
 

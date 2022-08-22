@@ -1,10 +1,28 @@
 import type { GameData } from 'types';
 
-import { useState, useReducer } from 'react';
-import { submitReducer, initialSubmitState } from 'lib/submitReducer';
+import { useSubmitScore } from 'hooks/submitScore';
+import { useState } from 'react';
+import { z } from 'zod';
 
 import Spinner from '~/Spinner';
 import Link from 'next/link';
+
+const schema = z.object({
+    name: z.string().min(1, 'Please enter your name'),
+    gameData: z
+        .array(
+            z.object({
+                correctAnswer: z.string(),
+                answer: z.string(),
+                timer: z.number().min(0).max(15)
+            }),
+            {
+                invalid_type_error: 'Malformed game data',
+                required_error: 'Missing game data'
+            }
+        )
+        .length(10, 'Malformed game data')
+});
 
 type PostGameProps = {
     gameData: GameData;
@@ -12,51 +30,42 @@ type PostGameProps = {
     initGame: () => void;
 };
 
-type ApiResponse = {
-    error: {
-        message: string;
-    } | null;
-};
-
 const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
     const [name, setName] = useState('');
+    const [errors, setErrors] = useState<string[]>([]);
 
-    const [submitStatus, dispatch] = useReducer(submitReducer, initialSubmitState);
+    const scoreMutation = useSubmitScore({
+        config: {
+            onError: (error) => {
+                setErrors([error.message]);
+            }
+        }
+    });
 
-    const handleSubmit = async () => {
-        if (name === '') {
-            dispatch({ type: 'error', message: 'Please enter your name' });
+    const handleSubmit = () => {
+        setErrors([]);
+
+        const validation = schema.safeParse({
+            name,
+            gameData
+        });
+
+        if (!validation.success) {
+            setErrors(validation.error.issues.map((issue) => issue.message));
             return;
         }
 
-        dispatch({ type: 'submit' });
-
-        const response = await fetch(`/api/scores`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                name,
-                gameData
-            })
-        });
-
-        const { error }: ApiResponse = await response.json();
-
-        if (error) {
-            dispatch({ type: 'error', message: error.message });
-        } else {
-            dispatch({ type: 'success' });
-        }
+        scoreMutation.mutate(validation.data);
     };
 
     return (
-        <section className="h-full flex flex-col justify-center">
+        <>
             <h2 className="text-lg text-yellow-800 text-center mb-2">
                 You scored {finalScore} points!
             </h2>
 
             <div className="w-2/3 mx-auto">
-                {submitStatus.success ? (
+                {scoreMutation.isSuccess ? (
                     <p className="text-center text-yellow-800 mb-4">
                         Your score has been submitted to the&nbsp;
                         <Link href="/leaderboard">
@@ -73,10 +82,10 @@ const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
-                        {submitStatus.pending ? (
-                            <button className="w-20 bg-yellow-300 text-yellow-800 rounded" disabled>
-                                <Spinner size={34} />
-                            </button>
+                        {scoreMutation.isLoading ? (
+                            <div className="w-20 bg-yellow-300 text-yellow-800 rounded">
+                                <Spinner size="sm" />
+                            </div>
                         ) : (
                             <button
                                 className="w-20 bg-yellow-300 text-yellow-800 hover:bg-yellow-800 hover:text-yellow-300 rounded"
@@ -88,12 +97,14 @@ const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
                     </div>
                 )}
 
-                {submitStatus.errorMessage ? (
-                    <p className="text-center text-yellow-800 mb-4">
-                        There was an error submitting your score.
-                        <br />
-                        Error Message: {submitStatus.errorMessage}
-                    </p>
+                {errors.length ? (
+                    <div className="text-center text-yellow-800 mb-4">
+                        <p>There was an error submitting your score.</p>
+                        Error Message(s):
+                        {errors.map((error, index) => (
+                            <p key={index}>- {error}</p>
+                        ))}
+                    </div>
                 ) : null}
             </div>
 
@@ -105,7 +116,7 @@ const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
                     Play Again
                 </button>
             </div>
-        </section>
+        </>
     );
 };
 

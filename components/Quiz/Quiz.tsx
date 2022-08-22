@@ -1,4 +1,4 @@
-import type { QuestionType, GameData, RoundData } from 'types';
+import type { GameData, RoundData } from 'types';
 
 import { useState } from 'react';
 
@@ -6,23 +6,19 @@ import PreGame from './PreGame';
 import Countdown from './Countdown';
 import InGame from './InGame';
 import PostGame from './PostGame';
+import { useQuestions } from 'hooks/getQuestions';
 
 type GameState = 'pre-game' | 'countdown' | 'in-game' | 'post-game';
 
-type ApiResponse = {
-    questions: QuestionType[];
-};
-
 const Quiz = () => {
-    const [questions, setQuestions] = useState<QuestionType[]>([]);
     const [gameState, setGameState] = useState<GameState>('pre-game');
     const [gameData, setGameData] = useState<GameData>([]);
     const [finalScore, setFinalScore] = useState(0);
 
+    const { data, isError, isSuccess, refetch } = useQuestions();
+
     const initGame = async () => {
-        const response = await fetch(`/api/questions`);
-        const data: ApiResponse = await response.json();
-        setQuestions(data.questions);
+        await refetch();
         setGameData([]);
         setGameState('countdown');
     };
@@ -39,23 +35,30 @@ const Quiz = () => {
         setGameState('post-game');
     };
 
-    switch (gameState) {
-        case 'pre-game':
-            return <PreGame initGame={initGame} />;
-        case 'countdown':
-            return <Countdown startGame={startGame} />;
-        case 'in-game':
-            return (
+    return (
+        <section className="h-full flex flex-col justify-center items-center">
+            {gameState === 'pre-game' && <PreGame initGame={initGame} />}
+
+            {isSuccess && gameState === 'countdown' && <Countdown startGame={startGame} />}
+
+            {gameState === 'in-game' && (
                 <InGame
-                    questions={questions}
+                    questions={data!}
                     collectRoundData={collectRoundData}
                     setFinalScore={setFinalScore}
                     endGame={endGame}
                 />
-            );
-        case 'post-game':
-            return <PostGame gameData={gameData} finalScore={finalScore} initGame={initGame} />;
-    }
+            )}
+
+            {gameState === 'post-game' && (
+                <PostGame gameData={gameData} finalScore={finalScore} initGame={initGame} />
+            )}
+
+            {isError && (
+                <div className="text-yellow-800">Error occured while getting questions.</div>
+            )}
+        </section>
+    );
 };
 
 export default Quiz;
