@@ -10,7 +10,7 @@ type SubmitScoreDTO = {
 };
 
 export const submitScore = ({ name, gameData }: SubmitScoreDTO) => {
-    return axios.post('/scores', {
+    return axios.post('/api/scores', {
         name,
         gameData
     });

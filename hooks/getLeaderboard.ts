@@ -9,7 +9,7 @@ type Score = {
 };
 
 export const getLeaderboard = (limit = 10): Promise<Score[]> => {
-    return axios.get('/scores', {
+    return axios.get('/api/scores', {
         params: {
             limit
         }
