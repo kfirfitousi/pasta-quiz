@@ -1,12 +1,12 @@
 import type { GameData, RoundData } from 'types';
 
 import { useState } from 'react';
+import { useQuestions } from 'hooks/getQuestions';
 
 import PreGame from './PreGame';
 import Countdown from './Countdown';
 import InGame from './InGame';
 import PostGame from './PostGame';
-import { useQuestions } from 'hooks/getQuestions';
 
 type GameState = 'pre-game' | 'countdown' | 'in-game' | 'post-game';
 

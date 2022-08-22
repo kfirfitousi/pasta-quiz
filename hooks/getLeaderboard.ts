@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { axios } from 'lib/axios';
-import { ExtractFnReturnType, QueryConfig } from 'lib/react-query';
+
+import type { ExtractFnReturnType, QueryConfig } from 'lib/react-query';
 
 type Score = {
     name: string;
@@ -8,7 +9,7 @@ type Score = {
 };
 
 export const getLeaderboard = (limit = 10): Promise<Score[]> => {
-    return axios.get('/api/scores', {
+    return axios.get('/scores', {
         params: {
             limit
         }
