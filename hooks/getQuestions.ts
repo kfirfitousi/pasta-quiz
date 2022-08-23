@@ -2,26 +2,24 @@ import type { ExtractFnReturnType, QueryConfig } from 'lib/react-query';
 import type { Question } from 'types';
 
 import { useQuery } from '@tanstack/react-query';
+import { sample, shuffle } from 'utils';
 
 export const getQuestions = async (): Promise<Question[]> => {
     const pasta = await import('data/pasta.json');
 
-    return pasta.shapes
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 10)
-        .map((shape) => ({
+    return sample(pasta.shapes, 10).map((shape) => {
+        const answerPool = pasta.shapes
+            .map((shapeObj) => shapeObj.name)
+            .filter((name) => name !== shape.name)
+            .concat(pasta.wrongAnswers);
+        const answers = shuffle([shape.name, ...sample(answerPool, 3)]);
+
+        return {
             imagePath: shape.imagePath,
-            answers: [
-                shape.name,
-                ...pasta.shapes
-                    .map((s) => s.name)
-                    .filter((name) => name !== shape.name)
-                    .concat(pasta.wrongAnswers)
-                    .sort(() => Math.random() - 0.5)
-                    .slice(0, 3)
-            ].sort(() => Math.random() - 0.5),
-            correctAnswer: shape.name
-        }));
+            correctAnswer: shape.name,
+            answers
+        };
+    });
 };
 
 type QueryFnType = typeof getQuestions;
