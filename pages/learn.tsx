@@ -1,20 +1,13 @@
-import type { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
+
+import { dehydrate } from '@tanstack/react-query';
+import { queryClient } from 'lib/react-query';
+import { getShapes } from 'hooks/getShapes';
 
 import Layout from '~/Layout';
-import Image from 'next/image';
+import PastaCards from '~/PastaCards';
 
-type ShapeType = {
-    name: string;
-    imagePath: string;
-};
-
-type LearnProps = {
-    shapes: ShapeType[];
-};
-
-const Learn: NextPage<LearnProps> = ({
-    shapes
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Learn: NextPage = () => {
     return (
         <Layout
             title="Pasta Quiz | Learn"
@@ -22,34 +15,19 @@ const Learn: NextPage<LearnProps> = ({
             How many pasta shapes can you recognize?
             Learn about pasta shapes here."
         >
-            <div className="flex flex-wrap justify-center">
-                {shapes.map((shape, index) => (
-                    <div key={index} className="w-2/3 sm:w-1/2 lg:w-1/3 p-2">
-                        <div className="w-full aspect-square object-cover relative">
-                            <Image
-                                src={`/${shape.imagePath}`}
-                                alt={shape.name}
-                                layout="fill"
-                                className="rounded-t"
-                            />
-                        </div>
-                        
-                        <h2 className="h-8 leading-8 text-lg text-center bg-yellow-300 text-yellow-800 rounded-b">
-                            {shape.name}
-                        </h2>
-                    </div>
-                ))}
-            </div>
+            <PastaCards />
         </Layout>
     );
 };
 
-export const getStaticProps: GetStaticProps<LearnProps> = async () => {
-    const pasta = await import('data/pasta.json');
+export const getStaticProps: GetStaticProps = async () => {
+    await queryClient.prefetchQuery(['shapes'], () => getShapes(), {
+        staleTime: 100000
+    });
 
     return {
         props: {
-            shapes: pasta.shapes
+            dehydratedState: dehydrate(queryClient)
         }
     };
 };

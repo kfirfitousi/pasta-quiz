@@ -1,12 +1,22 @@
-export type QuestionType = {
+type Shape = {
+    name: string;
+    imagePath: string;
+};
+
+export type Question = {
     imagePath: string;
     answers: string[];
     correctAnswer: string;
 };
 
+type Score = {
+    name: string;
+    score: number;
+};
+
 export type RoundData = {
     correctAnswer: string;
-    userAnswer: string;
+    answer: string;
     timer: number;
 };
 

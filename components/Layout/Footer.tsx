@@ -1,5 +1,6 @@
-import Image from 'next/image';
 import type { ImageLoader } from 'next/image';
+
+import Image from 'next/image';
 
 const badgeLoader: ImageLoader = ({ src, width, quality }) => {
     return `https://img.shields.io/badge/${src}&w=${width}&q=${quality || 75}`;
@@ -7,9 +8,9 @@ const badgeLoader: ImageLoader = ({ src, width, quality }) => {
 
 const Footer = () => {
     return (
-        <footer className="flex flex-col pb-3 text-xs md:text-sm text-center text-yellow-800">
+        <footer className="flex flex-col items-center pb-3 text-xs md:text-sm text-center text-yellow-800">
             <span className="w-full">Built with</span>
-            <div className="px-16 flex flex-row flex-nowrap justify-center items-center mx-auto my-2">
+            <div className="max-w-xl flex flex-row flex-nowrap items-center my-1">
                 <Image
                     src="react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"
                     loader={badgeLoader}
@@ -22,6 +23,13 @@ const Footer = () => {
                     loader={badgeLoader}
                     alt="Next.js"
                     width="78"
+                    height="28"
+                />
+                <Image
+                    src="-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white"
+                    loader={badgeLoader}
+                    alt="React Query"
+                    width="135.75"
                     height="28"
                 />
                 <Image

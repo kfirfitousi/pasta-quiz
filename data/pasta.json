@@ -2,347 +2,347 @@
     "shapes": [
         {
             "name": "BUCATINI",
-            "imagePath": "images/1.webp"
+            "imagePath": "/images/1.webp"
         },
         {
             "name": "PENNE",
-            "imagePath": "images/2.webp"
+            "imagePath": "/images/2.webp"
         },
         {
             "name": "SCIALATELLI",
-            "imagePath": "images/3.webp"
+            "imagePath": "/images/3.webp"
         },
         {
             "name": "TAGLIATELLE",
-            "imagePath": "images/4.webp"
+            "imagePath": "/images/4.webp"
         },
         {
             "name": "CASERECCE",
-            "imagePath": "images/5.webp"
+            "imagePath": "/images/5.webp"
         },
         {
             "name": "MAFALDA",
-            "imagePath": "images/6.webp"
+            "imagePath": "/images/6.webp"
         },
         {
             "name": "GNOCCHETTI SARDI",
-            "imagePath": "images/7.webp"
+            "imagePath": "/images/7.webp"
         },
         {
             "name": "GNOCCHI",
-            "imagePath": "images/8.webp"
+            "imagePath": "/images/8.webp"
         },
         {
             "name": "SPAGHETTI",
-            "imagePath": "images/9.webp"
+            "imagePath": "/images/9.webp"
         },
         {
             "name": "SAGNE TORTE",
-            "imagePath": "images/10.webp"
+            "imagePath": "/images/10.webp"
         },
         {
             "name": "PACCHERI",
-            "imagePath": "images/11.webp"
+            "imagePath": "/images/11.webp"
         },
         {
             "name": "TORTIGLIONI",
-            "imagePath": "images/12.webp"
+            "imagePath": "/images/12.webp"
         },
         {
             "name": "RIGATONI",
-            "imagePath": "images/13.webp"
+            "imagePath": "/images/13.webp"
         },
         {
             "name": "DITALINI",
-            "imagePath": "images/14.webp"
+            "imagePath": "/images/14.webp"
         },
         {
             "name": "FARFALLE",
-            "imagePath": "images/15.webp"
+            "imagePath": "/images/15.webp"
         },
         {
             "name": "MACCHERONI",
-            "imagePath": "images/16.webp"
+            "imagePath": "/images/16.webp"
         },
         {
             "name": "LINGUINE",
-            "imagePath": "images/17.webp"
+            "imagePath": "/images/17.webp"
         },
         {
             "name": "PICI",
-            "imagePath": "images/18.webp"
+            "imagePath": "/images/18.webp"
         },
         {
             "name": "RAVIOLI",
-            "imagePath": "images/19.webp"
+            "imagePath": "/images/19.webp"
         },
         {
             "name": "TORTELLINI",
-            "imagePath": "images/20.webp"
+            "imagePath": "/images/20.webp"
         },
         {
             "name": "CAPRICCI",
-            "imagePath": "images/21.webp"
+            "imagePath": "/images/21.webp"
         },
         {
             "name": "FUSILLI",
-            "imagePath": "images/22.webp"
+            "imagePath": "/images/22.webp"
         },
         {
             "name": "CANULE",
-            "imagePath": "images/23.webp"
+            "imagePath": "/images/23.webp"
         },
         {
             "name": "CHIOCCIOLE",
-            "imagePath": "images/24.webp"
+            "imagePath": "/images/24.webp"
         },
         {
             "name": "DITALI",
-            "imagePath": "images/25.webp"
+            "imagePath": "/images/25.webp"
         },
         {
             "name": "ZITI",
-            "imagePath": "images/26.webp"
+            "imagePath": "/images/26.webp"
         },
         {
             "name": "FRICELLI",
-            "imagePath": "images/27.webp"
+            "imagePath": "/images/27.webp"
         },
         {
             "name": "ORECCHIETTE",
-            "imagePath": "images/28.webp"
+            "imagePath": "/images/28.webp"
         },
         {
             "name": "STELLINE",
-            "imagePath": "images/29.webp"
+            "imagePath": "/images/29.webp"
         },
         {
             "name": "PASSATELLI",
-            "imagePath": "images/30.webp"
+            "imagePath": "/images/30.webp"
         },
         {
             "name": "MEZZE PENNE",
-            "imagePath": "images/31.webp"
+            "imagePath": "/images/31.webp"
         },
         {
             "name": "LASAGNE",
-            "imagePath": "images/32.webp"
+            "imagePath": "/images/32.webp"
         },
         {
             "name": "CROXETTI",
-            "imagePath": "images/33.webp"
+            "imagePath": "/images/33.webp"
         },
         {
             "name": "VERMICELLI",
-            "imagePath": "images/34.webp"
+            "imagePath": "/images/34.webp"
         },
         {
             "name": "AGNOLOTTI",
-            "imagePath": "images/35.webp"
+            "imagePath": "/images/35.webp"
         },
         {
             "name": "TORTELLONI",
-            "imagePath": "images/36.webp"
+            "imagePath": "/images/36.webp"
         },
         {
             "name": "TORTELLI",
-            "imagePath": "images/37.webp"
+            "imagePath": "/images/37.webp"
         },
         {
             "name": "FILINI",
-            "imagePath": "images/38.webp"
+            "imagePath": "/images/38.webp"
         },
         {
             "name": "ANELLI",
-            "imagePath": "images/39.webp"
+            "imagePath": "/images/39.webp"
         },
         {
             "name": "ANELLINI",
-            "imagePath": "images/40.webp"
+            "imagePath": "/images/40.webp"
         },
         {
             "name": "BIGOLI",
-            "imagePath": "images/41.webp"
+            "imagePath": "/images/41.webp"
         },
         {
             "name": "STROZZAPRETI",
-            "imagePath": "images/42.webp"
+            "imagePath": "/images/42.webp"
         },
         {
             "name": "BAVETTE",
-            "imagePath": "images/43.webp"
+            "imagePath": "/images/43.webp"
         },
         {
             "name": "TAGLIOLINI",
-            "imagePath": "images/44.webp"
+            "imagePath": "/images/44.webp"
         },
         {
             "name": "PIZZOCCHERI",
-            "imagePath": "images/45.webp"
+            "imagePath": "/images/45.webp"
         },
         {
             "name": "SPAGHETTI ALLA CHITARRA",
-            "imagePath": "images/46.webp"
+            "imagePath": "/images/46.webp"
         },
         {
             "name": "TAGLIERINI",
-            "imagePath": "images/47.webp"
+            "imagePath": "/images/47.webp"
         },
         {
             "name": "TRENETTE",
-            "imagePath": "images/48.webp"
+            "imagePath": "/images/48.webp"
         },
         {
             "name": "CANNELLONI",
-            "imagePath": "images/49.webp"
+            "imagePath": "/images/49.webp"
         },
         {
             "name": "CAVATAPPI",
-            "imagePath": "images/50.webp"
+            "imagePath": "/images/50.webp"
         },
         {
             "name": "GARGANELLI",
-            "imagePath": "images/51.webp"
+            "imagePath": "/images/51.webp"
         },
         {
             "name": "CAVATELLI",
-            "imagePath": "images/52.webp"
+            "imagePath": "/images/52.webp"
         },
         {
             "name": "CONCHIGLIE",
-            "imagePath": "images/53.webp"
+            "imagePath": "/images/53.webp"
         },
         {
             "name": "FOGLIE D'ULIVO",
-            "imagePath": "images/54.webp"
+            "imagePath": "/images/54.webp"
         },
         {
             "name": "LUMACHE",
-            "imagePath": "images/55.webp"
+            "imagePath": "/images/55.webp"
         },
         {
             "name": "PIPE",
-            "imagePath": "images/56.webp"
+            "imagePath": "/images/56.webp"
         },
         {
             "name": "ROTELLE",
-            "imagePath": "images/57.webp"
+            "imagePath": "/images/57.webp"
         },
         {
             "name": "TROFIE",
-            "imagePath": "images/58.webp"
+            "imagePath": "/images/58.webp"
         },
         {
             "name": "FREGOLA",
-            "imagePath": "images/59.webp"
+            "imagePath": "/images/59.webp"
         },
         {
             "name": "QUADRETTINI",
-            "imagePath": "images/60.webp"
+            "imagePath": "/images/60.webp"
         },
         {
             "name": "CAPPELLETTI",
-            "imagePath": "images/61.webp"
+            "imagePath": "/images/61.webp"
         },
         {
             "name": "FAGOTTINI",
-            "imagePath": "images/62.webp"
+            "imagePath": "/images/62.webp"
         },
         {
             "name": "MEZZELUNE",
-            "imagePath": "images/63.webp"
+            "imagePath": "/images/63.webp"
         },
         {
             "name": "SPÄTZLE",
-            "imagePath": "images/64.webp"
+            "imagePath": "/images/64.webp"
         },
         {
             "name": "SEDANI",
-            "imagePath": "images/65.webp"
+            "imagePath": "/images/65.webp"
         },
         {
             "name": "PAPPARDELLE",
-            "imagePath": "images/66.webp"
+            "imagePath": "/images/66.webp"
         },
         {
             "name": "FETTUCCINE",
-            "imagePath": "images/67.webp"
+            "imagePath": "/images/67.webp"
         },
         {
             "name": "TORCHIETTI",
-            "imagePath": "images/68.webp"
+            "imagePath": "/images/68.webp"
         },
         {
             "name": "SPAGHETTINI",
-            "imagePath": "images/69.webp"
+            "imagePath": "/images/69.webp"
         },
         {
             "name": "CALAMARATA",
-            "imagePath": "images/70.webp"
+            "imagePath": "/images/70.webp"
         },
         {
             "name": "TONNARELLI",
-            "imagePath": "images/71.webp"
+            "imagePath": "/images/71.webp"
         },
         {
             "name": "ACINI DI PEPE",
-            "imagePath": "images/72.webp"
+            "imagePath": "/images/72.webp"
         },
         {
             "name": "CAPELLI D'ANGELO",
-            "imagePath": "images/73.webp"
+            "imagePath": "/images/73.webp"
         },
         {
             "name": "CAPPELLINI",
-            "imagePath": "images/74.webp"
+            "imagePath": "/images/74.webp"
         },
         {
             "name": "FILEI",
-            "imagePath": "images/75.webp"
+            "imagePath": "/images/75.webp"
         },
         {
             "name": "ORZO",
-            "imagePath": "images/76.webp"
+            "imagePath": "/images/76.webp"
         },
         {
             "name": "PASTINA",
-            "imagePath": "images/77.webp"
+            "imagePath": "/images/77.webp"
         },
         {
             "name": "TROCCOLI",
-            "imagePath": "images/78.webp"
+            "imagePath": "/images/78.webp"
         },
         {
             "name": "BUSIATE",
-            "imagePath": "images/79.webp"
+            "imagePath": "/images/79.webp"
         },
         {
             "name": "LASAGNE VERDI",
-            "imagePath": "images/80.webp"
+            "imagePath": "/images/80.webp"
         },
         {
             "name": "SPACCATELLE",
-            "imagePath": "images/81.webp"
+            "imagePath": "/images/81.webp"
         },
         {
             "name": "CAMPANELLE",
-            "imagePath": "images/82.webp"
+            "imagePath": "/images/82.webp"
         },
         {
             "name": "MOSTACCIOLI",
-            "imagePath": "images/83.webp"
+            "imagePath": "/images/83.webp"
         },
         {
             "name": "GEMELLI",
-            "imagePath": "images/84.webp"
+            "imagePath": "/images/84.webp"
         },
         {
             "name": "RADIATORI",
-            "imagePath": "images/85.webp"
+            "imagePath": "/images/85.webp"
         },
         {
             "name": "CASONCELLI",
-            "imagePath": "images/86.webp"
+            "imagePath": "/images/86.webp"
         }
     ],
     "wrongAnswers": [

@@ -1,12 +1,18 @@
+const spinnerSizes = {
+    sm: 34,
+    md: 50,
+    lg: 80
+};
+
 type SpinnerProps = {
-    size: number;
+    size: keyof typeof spinnerSizes;
 };
 
 const Spinner = ({ size }: SpinnerProps) => {
     return (
         <svg
-            width={`${size}px`}
-            height={`${size}px`}
+            width={spinnerSizes[size]}
+            height={spinnerSizes[size]}
             viewBox="0 0 100 100"
             preserveAspectRatio="xMidYMid"
             className="fill-current mx-auto"
