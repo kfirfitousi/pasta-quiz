@@ -88,12 +88,12 @@ const Game = ({ questions, collectRoundData, setFinalScore, endGame }: GameProps
 
     return (
         <>
-            <div className="w-64 sm:w-3/4 flex justify-between text-center text-yellow-800 text-md">
+            <div className="w-64 sm:w-3/4 flex justify-between text-center text-yellow-800">
                 <p>{questionNumber + 1}/10</p>
                 <p>Score: {score}</p>
             </div>
 
-            <div className="relative w-64 sm:w-3/4 rounded shadow-sm aspect-square border border-solid border-yellow-500">
+            <div className="relative w-64 sm:w-3/4 rounded shadow-sm aspect-square border border-yellow-300">
                 {questions.map((question, index) => (
                     <Image
                         src={question.imagePath}
@@ -109,11 +109,11 @@ const Game = ({ questions, collectRoundData, setFinalScore, endGame }: GameProps
 
             <ul className="w-64 sm:w-3/4 flex flex-row flex-wrap justify-between mt-1">
                 {answers.map((answer, index) => (
-                    <li className="w-full sm:w-1/2 my-0.5 px-0.5" key={`${index}${questionNumber}`}>
+                    <li className="w-full sm:w-1/2 p-0.5 sm:p-1" key={`${index}${questionNumber}`}>
                         <button
                             className={`
-                                    w-full h-11 sm:h-9 rounded select-none text-xl shadow-sm hover:shadow-lg
-                                    ${answer.length > 20 ? 'text-base sm:text-sm' : 'text-lg'}
+                                    w-full h-11 sm:h-16 rounded select-none text-xl shadow-sm hover:shadow-lg
+                                    ${answer.length > 20 ? 'text-base sm:text-sm' : 'text-xl'}
                                     ${
                                         userAnswer && answer === correctAnswer
                                             ? 'text-yellow-100 bg-green-500'
@@ -133,9 +133,9 @@ const Game = ({ questions, collectRoundData, setFinalScore, endGame }: GameProps
                 ))}
             </ul>
 
-            <div className="w-64 sm:w-3/4 px-0.5 h-9 mx-auto mt-0.5">
+            <div className="w-64 sm:w-3/4 px-0.5 h-11 mx-auto mt-1 mb-20">
                 <div
-                    className="leading-9 text-center text-yellow-900 bg-[url(/images/progress.png)] bg-cover bg-no-repeat h-full"
+                    className="h-full leading-[2.75rem] text-center text-yellow-900 bg-[url(/images/progress.png)] bg-cover bg-no-repeat"
                     style={{
                         backgroundSize: `${(timer * 100) / 15}% 100%`
                     }}
