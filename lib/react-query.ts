@@ -1,11 +1,11 @@
-import { AxiosError } from 'axios';
+import type { AxiosError } from 'axios';
+import type { PromiseValue } from 'type-fest';
 import {
     QueryClient,
     UseQueryOptions,
     UseMutationOptions,
     DefaultOptions
 } from '@tanstack/react-query';
-import { PromiseValue } from 'type-fest';
 
 const queryConfig: DefaultOptions = {
     queries: {

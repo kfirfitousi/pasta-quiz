@@ -45,7 +45,7 @@ const PastaCard = ({ shape }: PastaCardProps) => {
 
     return (
         <div
-            className="p-3 max-w-xs basis-4/5 sm:basis-1/2 lg:basis-1/3"
+            className="p-3 max-w-xs basis-4/5 sm:basis-1/2 lg:basis-1/3 cursor-pointer"
             onClick={() => setIsOpen(true)}
         >
             <div className="flex flex-col w-full aspect-square rounded shadow-md bg-yellow-300 text-yellow-800 hover:bg-yellow-800 hover:text-yellow-300 hover:-translate-y-2">
