@@ -4,14 +4,14 @@ import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 
-type InGameProps = {
+type GameProps = {
     questions: Question[];
     collectRoundData: (roundData: RoundData) => void;
     setFinalScore: (score: number) => void;
     endGame: () => void;
 };
 
-const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameProps) => {
+const Game = ({ questions, collectRoundData, setFinalScore, endGame }: GameProps) => {
     const [questionNumber, setQuestionNumber] = useState(0);
     const [userAnswer, setUserAnswer] = useState('');
     const [score, setScore] = useState(0);
@@ -147,4 +147,4 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
     );
 };
 
-export default InGame;
+export default Game;

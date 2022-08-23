@@ -1,8 +1,8 @@
-type PreGameProps = {
+type IntroProps = {
     initGame: () => void;
 };
 
-const PreGame = ({ initGame }: PreGameProps) => {
+const Intro = ({ initGame }: IntroProps) => {
     return (
         <>
             <p className="text-xl text-center text-yellow-800">
@@ -24,4 +24,4 @@ const PreGame = ({ initGame }: PreGameProps) => {
     );
 };
 
-export default PreGame;
+export default Intro;
