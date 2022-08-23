@@ -113,7 +113,7 @@ const Game = ({ questions, collectRoundData, setFinalScore, endGame }: GameProps
                         <button
                             className={`
                                     w-full h-11 sm:h-9 rounded select-none text-xl shadow-sm hover:shadow-lg
-                                    ${answer.length > 20 ? 'sm:text-sm' : 'sm:text-lg'}
+                                    ${answer.length > 20 ? 'text-base sm:text-sm' : 'text-lg'}
                                     ${
                                         userAnswer && answer === correctAnswer
                                             ? 'text-yellow-100 bg-green-500'
