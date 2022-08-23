@@ -93,7 +93,7 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
                 <p>Score: {score}</p>
             </div>
 
-            <div className="w-64 sm:w-3/4 aspect-square border border-solid border-yellow-500 rounded relative">
+            <div className="relative w-64 sm:w-3/4 rounded shadow-sm aspect-square border border-solid border-yellow-500">
                 {questions.map((question, index) => (
                     <Image
                         src={question.imagePath}
@@ -112,7 +112,7 @@ const InGame = ({ questions, collectRoundData, setFinalScore, endGame }: InGameP
                     <li className="w-full sm:w-1/2 my-0.5 px-0.5" key={`${index}${questionNumber}`}>
                         <button
                             className={`
-                                    w-full h-11 sm:h-9 rounded select-none text-xl 
+                                    w-full h-11 sm:h-9 rounded select-none text-xl shadow-sm hover:shadow-lg
                                     ${answer.length > 20 ? 'sm:text-sm' : 'sm:text-lg'}
                                     ${
                                         userAnswer && answer === correctAnswer

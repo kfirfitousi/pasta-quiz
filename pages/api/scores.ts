@@ -20,7 +20,7 @@ const schema = z.object({
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     switch (req.method) {
         case 'GET': {
-            const limit = req.query.limit ? parseInt(req.query.limit as string) : 10;
+            const limit = parseInt(req.query.limit as string) || Infinity;
 
             const { error, data } = await supabase
                 .from<Score>('leaderboard')

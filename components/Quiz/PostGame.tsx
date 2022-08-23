@@ -77,18 +77,18 @@ const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
                     <div className="flex flex-row w-fit mx-auto mb-4">
                         <input
                             type="text"
-                            className="w-36 bg-yellow-200 text-yellow-800 placeholder:text-yellow-800 border border-yellow-300 rounded px-2 py-1 mr-2"
+                            className="w-36 rounded px-2 py-1 mr-2 shadow-sm focus:shadow-lg bg-yellow-200 text-yellow-800 placeholder:text-yellow-800 border border-yellow-300"
                             placeholder="Enter your name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
                         {scoreMutation.isLoading ? (
-                            <div className="w-20 bg-yellow-300 text-yellow-800 rounded">
+                            <div className="w-20 rounded shadow-sm bg-yellow-300 text-yellow-800">
                                 <Spinner size="sm" />
                             </div>
                         ) : (
                             <button
-                                className="w-20 bg-yellow-300 text-yellow-800 hover:bg-yellow-800 hover:text-yellow-300 rounded"
+                                className="w-20 rounded shadow-sm bg-yellow-300 text-yellow-800 hover:bg-yellow-800 hover:text-yellow-300"
                                 onClick={() => handleSubmit()}
                             >
                                 Submit
@@ -110,7 +110,7 @@ const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
 
             <div className="w-36 mx-auto mb-20">
                 <button
-                    className="bg-yellow-300 text-yellow-800 hover:bg-yellow-800 hover:text-yellow-300 rounded w-full h-8 mx-auto"
+                    className="w-full h-8 mx-auto rounded shadow-sm bg-yellow-300 text-yellow-800 hover:bg-yellow-800 hover:text-yellow-300"
                     onClick={() => initGame()}
                 >
                     Play Again

@@ -19,7 +19,7 @@ const Header = () => {
                     <Link href={path} key={index}>
                         <a
                             className={`
-                            hover:text-yellow-300 hover:bg-yellow-800 p-1 md:p-2 rounded
+                            hover:text-yellow-300 hover:bg-yellow-800 hover:shadow-md p-1.5 sm:p-2.5 rounded
                             ${router.asPath === path ? 'underline underline-offset-8' : ''}
                             `}
                         >

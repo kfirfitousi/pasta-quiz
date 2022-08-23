@@ -1,4 +1,4 @@
-import type { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
 
 import Layout from '~/Layout';
 import Image from 'next/image';
@@ -12,9 +12,7 @@ type LearnProps = {
     shapes: Shape[];
 };
 
-const Learn: NextPage<LearnProps> = ({
-    shapes
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Learn: NextPage<LearnProps> = ({ shapes }) => {
     return (
         <Layout
             title="Pasta Quiz | Learn"
@@ -25,7 +23,7 @@ const Learn: NextPage<LearnProps> = ({
             <div className="flex flex-row flex-wrap justify-center mt-5">
                 {shapes.map((shape, index) => (
                     <div key={index} className="p-3 max-w-xs basis-4/5 sm:basis-1/2 lg:basis-1/3">
-                        <div className="flex flex-col w-full aspect-square rounded-b shadow-sm">
+                        <div className="flex flex-col w-full aspect-square rounded-b shadow-md">
                             <div className="flex-shrink w-full h-full object-cover relative">
                                 <Image
                                     src={shape.imagePath}

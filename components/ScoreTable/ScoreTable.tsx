@@ -52,7 +52,7 @@ const ScoreTable = () => {
 
             {limit <= 40 && (
                 <button
-                    className="bg-yellow-300 text-yellow-800 hover:bg-yellow-800 hover:text-yellow-300 rounded h-9 px-3 mt-3 shadow-sm"
+                    className="h-9 px-3 mt-3 shadow-md rounded bg-yellow-300 text-yellow-800 hover:bg-yellow-800 hover:text-yellow-300"
                     onClick={() => setLimit(limit + 10)}
                 >
                     Show More
