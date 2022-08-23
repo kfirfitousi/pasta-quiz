@@ -5,15 +5,10 @@ import Spinner from '~/Spinner';
 
 const ScoreTable = () => {
     const [limit, setLimit] = useState(10);
-    const { data, isLoading, isError } = useLeaderboard({ limit });
-
-    if (isLoading) {
-        return (
-            <div className="text-center text-yellow-800 mt-5">
-                <Spinner size="md" />
-            </div>
-        );
-    }
+    const { data, isError } = useLeaderboard({
+        limit,
+        config: { keepPreviousData: true }
+    });
 
     if (isError) {
         return (

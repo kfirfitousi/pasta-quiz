@@ -1,3 +1,8 @@
+type Shape = {
+    name: string;
+    imagePath: string;
+};
+
 export type Question = {
     imagePath: string;
     answers: string[];
