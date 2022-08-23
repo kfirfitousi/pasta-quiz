@@ -10,7 +10,7 @@ const Footer = () => {
     return (
         <footer className="flex flex-col pb-3 text-xs md:text-sm text-center text-yellow-800">
             <span className="w-full">Built with</span>
-            <div className="px-16 flex flex-row flex-nowrap justify-center items-center mx-auto my-2">
+            <div className="h-6 max-w-xl flex flex-row flex-nowrap justify-center items-center mx-auto my-2">
                 <Image
                     src="react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"
                     loader={badgeLoader}
@@ -23,6 +23,13 @@ const Footer = () => {
                     loader={badgeLoader}
                     alt="Next.js"
                     width="78"
+                    height="28"
+                />
+                <Image
+                    src="-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white"
+                    loader={badgeLoader}
+                    alt="React Query"
+                    width="135.75"
                     height="28"
                 />
                 <Image
@@ -55,7 +62,7 @@ const Footer = () => {
                 />
             </div>
             <span>
-                Source code available on&nbsp;
+                Source code available on{' '}
                 <a
                     href="https://github.com/kfirfitousi/pasta-quiz"
                     className="underline hover:text-yellow-600"
