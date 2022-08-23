@@ -2,20 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import type { Score } from 'types';
 
 import { supabase } from 'lib/initSupabase';
-import { z } from 'zod';
-
-const schema = z.object({
-    name: z.string().min(1),
-    gameData: z
-        .array(
-            z.object({
-                correctAnswer: z.string(),
-                answer: z.string(),
-                timer: z.number().min(0).max(15)
-            })
-        )
-        .length(10)
-});
+import { SubmitSchema } from '~/Quiz';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     switch (req.method) {
@@ -36,10 +23,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
 
         case 'POST': {
-            const request = schema.safeParse(req.body);
+            const request = SubmitSchema.safeParse(req.body);
 
             if (!request.success) {
-                return res.status(400).end('Invalid payload');
+                return res
+                    .status(400)
+                    .end(request.error.issues.map((issue) => issue.message).join('\n'));
             }
 
             const { name, gameData } = request.data;

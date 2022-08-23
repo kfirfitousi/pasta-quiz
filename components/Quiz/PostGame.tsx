@@ -7,7 +7,7 @@ import { z } from 'zod';
 import Spinner from '~/Spinner';
 import Link from 'next/link';
 
-const schema = z.object({
+export const SubmitSchema = z.object({
     name: z.string().min(1, 'Please enter your name'),
     gameData: z
         .array(
@@ -45,7 +45,7 @@ const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
     const handleSubmit = () => {
         setErrors([]);
 
-        const validation = schema.safeParse({
+        const validation = SubmitSchema.safeParse({
             name,
             gameData
         });
