@@ -33,11 +33,11 @@ const PastaQuiz = ({ Component, pageProps, router }: AppProps) => {
     return (
         <QueryClientProvider client={queryClient}>
             <Hydrate state={pageProps.dehydratedState}>
-                {isLoading ? (
+                {isLoading && (
                     <div className="w-full h-20 absolute z-10 flex items-center inset-y-12 sm:inset-0 text-yellow-800">
                         <Spinner size="lg" />
                     </div>
-                ) : null}
+                )}
 
                 <Component {...pageProps} />
             </Hydrate>

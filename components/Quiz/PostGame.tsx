@@ -97,7 +97,7 @@ const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
                     </div>
                 )}
 
-                {errors.length ? (
+                {errors.length && (
                     <div className="text-center text-yellow-800 mb-4">
                         <p>There was an error submitting your score.</p>
                         Error Message(s):
@@ -105,7 +105,7 @@ const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
                             <p key={index}>- {error}</p>
                         ))}
                     </div>
-                ) : null}
+                )}
             </div>
 
             <div className="w-36 mx-auto mb-20">

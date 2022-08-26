@@ -20,14 +20,12 @@ const Layout = ({ children, title, description }: LayoutProps) => {
                 <link rel="manifest" href="/site.webmanifest" />
             </Head>
 
-            <div className="container max-w-2xl m-auto px-4 select-none">
-                <div className="flex flex-col h-screen">
-                    <Header />
+            <div className="container flex flex-col h-screen max-w-2xl m-auto px-4 select-none">
+                <Header />
 
-                    <main className="flex-grow mb-4">{children}</main>
+                <main className="flex-grow">{children}</main>
 
-                    <Footer />
-                </div>
+                <Footer />
             </div>
         </>
     );

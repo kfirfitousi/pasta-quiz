@@ -8,9 +8,10 @@ const badgeLoader: ImageLoader = ({ src, width, quality }) => {
 
 const Footer = () => {
     return (
-        <footer className="flex flex-col items-center pb-3 text-xs md:text-sm text-center text-yellow-800">
-            <span className="w-full">Built with</span>
-            <div className="max-w-xl flex flex-row flex-nowrap items-center my-1">
+        <footer className="flex flex-col items-center py-4 text-xs md:text-sm text-center text-yellow-800">
+            <div className="w-full">Built with</div>
+
+            <div className="flex flex-row flex-nowrap max-w-xl my-1">
                 <Image
                     src="react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"
                     loader={badgeLoader}
@@ -61,7 +62,8 @@ const Footer = () => {
                     height="28"
                 />
             </div>
-            <span>
+
+            <div>
                 Source code available on{' '}
                 <a
                     href="https://github.com/kfirfitousi/pasta-quiz"
@@ -72,7 +74,7 @@ const Footer = () => {
                     GitHub
                 </a>
                 .
-            </span>
+            </div>
         </footer>
     );
 };

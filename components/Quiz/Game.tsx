@@ -3,6 +3,7 @@ import type { RoundData, Question } from 'types';
 import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
+import clsx from 'clsx';
 
 type GameProps = {
     questions: Question[];
@@ -97,9 +98,7 @@ const Game = ({ questions, collectRoundData, setFinalScore, endGame }: GameProps
                 {questions.map((question, index) => (
                     <Image
                         src={question.imagePath}
-                        className={`w-20 rounded ${
-                            index === questionNumber ? 'visible' : 'invisible'
-                        }`}
+                        className={clsx('w-20 rounded', index !== questionNumber && 'invisible')}
                         layout="fill"
                         alt="mysterious pasta shape"
                         key={index}
@@ -111,19 +110,20 @@ const Game = ({ questions, collectRoundData, setFinalScore, endGame }: GameProps
                 {answers.map((answer, index) => (
                     <li className="w-full sm:w-1/2 p-0.5 sm:p-1" key={`${index}${questionNumber}`}>
                         <button
-                            className={`
-                                    w-full h-11 sm:h-16 rounded select-none text-xl shadow-sm hover:shadow-lg
-                                    ${answer.length > 20 ? 'text-base sm:text-sm' : 'text-xl'}
-                                    ${
-                                        userAnswer && answer === correctAnswer
-                                            ? 'text-yellow-100 bg-green-500'
-                                            : (userAnswer === answer && answer !== correctAnswer) ||
-                                              (userAnswer === 'no-answer' &&
-                                                  answer !== correctAnswer)
-                                            ? 'text-yellow-100 bg-red-500'
-                                            : 'text-yellow-800 bg-yellow-300 hover:text-yellow-300 hover:bg-yellow-800'
-                                    }
-                                `}
+                            className={clsx(
+                                'w-full h-11 sm:h-16 rounded select-none text-xl shadow-sm hover:shadow-lg',
+                                answer.length > 20 ? 'text-base sm:text-sm' : 'text-xl',
+                                userAnswer &&
+                                    answer === correctAnswer &&
+                                    'text-yellow-100 bg-green-500',
+
+                                (userAnswer === answer || userAnswer === 'no-answer') &&
+                                    answer !== correctAnswer &&
+                                    'text-yellow-100 bg-red-500',
+
+                                (!userAnswer || userAnswer !== answer) &&
+                                    'text-yellow-800 bg-yellow-300 hover:text-yellow-300 hover:bg-yellow-800'
+                            )}
                             disabled={userAnswer !== ''}
                             onClick={() => handleAnswer(answer)}
                         >

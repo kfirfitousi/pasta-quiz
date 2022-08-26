@@ -21,7 +21,9 @@ const Countdown = ({ startGame }: CountdownProps) => {
         }
     }, [countdown, startGame]);
 
-    return <h1 className="text-8xl text-yellow-800 text-center mb-20 select-none">{countdown}</h1>;
+    return (
+        <div className="text-8xl text-yellow-800 text-center mb-20 select-none">{countdown}</div>
+    );
 };
 
 export default Countdown;
