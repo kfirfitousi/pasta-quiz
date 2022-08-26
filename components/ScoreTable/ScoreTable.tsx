@@ -5,10 +5,14 @@ import Spinner from '~/Spinner';
 
 const ScoreTable = () => {
     const [limit, setLimit] = useState(10);
-    const { data, isFetching, isError, isPreviousData } = useLeaderboard({
+    const { data, isFetching, isError, isLoading, isPreviousData } = useLeaderboard({
         limit,
         config: { keepPreviousData: true }
     });
+
+    if (isLoading) {
+        return <div className="text-center text-yellow-800 mt-5">Loading...</div>;
+    }
 
     if (isError) {
         return (
@@ -28,7 +32,7 @@ const ScoreTable = () => {
             </div>
 
             <div className="flex flex-col space-y-1.5">
-                {data?.map(({ name, score }, index) => (
+                {data.scores.map(({ name, score }, index) => (
                     <div
                         key={index}
                         className="flex flex-row text-center h-8 md:h-10 bg-yellow-200 rounded shadow-sm"
@@ -47,9 +51,13 @@ const ScoreTable = () => {
             </div>
 
             <button
-                className="h-9 px-3 mt-3 shadow-md rounded bg-yellow-300 text-yellow-800 hover:bg-yellow-800 hover:text-yellow-300"
-                disabled={isPreviousData}
-                onClick={() => setLimit((prev) => prev + 10)}
+                className="h-9 px-3 mt-3 shadow-md rounded bg-yellow-300 text-yellow-800 hover:bg-yellow-800 hover:text-yellow-300 disabled:text-zinc-700 disabled:bg-zinc-200"
+                disabled={isPreviousData || !data?.hasMore}
+                onClick={() => {
+                    if (!isPreviousData && data.hasMore) {
+                        setLimit((prev) => prev + 10);
+                    }
+                }}
             >
                 {isFetching ? <Spinner size="sm" /> : 'Show More'}
             </button>

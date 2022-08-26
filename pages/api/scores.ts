@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { Score } from 'types';
+import type { Score, ScoreList } from 'types';
 
 import { supabase } from 'lib/initSupabase';
 import { SubmitSchema } from '~/Quiz';
@@ -9,9 +9,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         case 'GET': {
             const limit = parseInt(req.query.limit as string) || Infinity;
 
-            const { error, data } = await supabase
+            const { error, data, count } = await supabase
                 .from<Score>('leaderboard')
-                .select('name, score')
+                .select('name, score', { count: 'exact' })
                 .order('score', { ascending: false })
                 .limit(limit);
 
@@ -19,7 +19,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 return res.status(500).end('Error occured while fetching leaderboard');
             }
 
-            return res.status(200).json(data);
+            const scoreList: ScoreList = {
+                scores: data,
+                hasMore: count! > limit
+            };
+
+            return res.status(200).json(scoreList);
         }
 
         case 'POST': {
