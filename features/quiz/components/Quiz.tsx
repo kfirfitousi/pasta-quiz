@@ -1,16 +1,16 @@
-import type { GameData, RoundData } from 'types';
+import type { GameData, RoundData } from '../types';
 
 import { useState } from 'react';
-import { useQuestions } from 'hooks/getQuestions';
+import { useQuestions } from '../api/getQuestions';
 
-import Intro from './Intro';
-import Countdown from './Countdown';
-import Game from './Game';
-import PostGame from './PostGame';
+import { Intro } from './Intro';
+import { Countdown } from './Countdown';
+import { Game } from './Game';
+import { PostGame } from './PostGame';
 
 type GameState = 'pre-game' | 'countdown' | 'in-game' | 'post-game';
 
-const Quiz = () => {
+export const Quiz = () => {
     const [gameState, setGameState] = useState<GameState>('pre-game');
     const [finalScore, setFinalScore] = useState(0);
     const [gameData, setGameData] = useState<GameData>([]);
@@ -69,5 +69,3 @@ const Quiz = () => {
         </section>
     );
 };
-
-export default Quiz;

@@ -1,13 +1,16 @@
 import { useState } from 'react';
-import { useLeaderboard } from 'hooks/getLeaderboard';
+import { useLeaderboard } from '../api/getLeaderboard';
 
-import Spinner from '~/Spinner';
+import { Spinner } from '~/Spinner';
 
-const ScoreTable = () => {
+export const ScoreTable = () => {
     const [limit, setLimit] = useState(10);
     const { data, isFetching, isError, isLoading, isPreviousData } = useLeaderboard({
         limit,
-        config: { keepPreviousData: true }
+        config: {
+            staleTime: 60 * 1000,
+            keepPreviousData: true
+        }
     });
 
     if (isLoading) {
@@ -51,7 +54,7 @@ const ScoreTable = () => {
             </div>
 
             <button
-                className="h-9 px-3 mt-3 shadow-md rounded bg-yellow-300 text-yellow-800 hover:bg-yellow-800 hover:text-yellow-300 disabled:text-zinc-700 disabled:bg-zinc-200"
+                className="h-9 px-3 mt-3 shadow-md rounded bg-yellow-300 text-yellow-800 hover:enabled:bg-yellow-800 hover:enabled:text-yellow-300 disabled:opacity-50"
                 disabled={isPreviousData || !data?.hasMore}
                 onClick={() => {
                     if (!isPreviousData && data.hasMore) {
@@ -64,5 +67,3 @@ const ScoreTable = () => {
         </section>
     );
 };
-
-export default ScoreTable;

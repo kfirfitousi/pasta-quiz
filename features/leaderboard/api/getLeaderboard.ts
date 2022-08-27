@@ -1,5 +1,5 @@
 import type { ExtractFnReturnType, QueryConfig } from 'lib/react-query';
-import type { ScoreList } from 'types';
+import type { ScoreList } from '../types';
 
 import { useQuery } from '@tanstack/react-query';
 import { axios } from 'lib/axios';

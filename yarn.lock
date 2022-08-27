@@ -148,17 +148,33 @@
   dependencies:
     "tslib" "^2.4.0"
 
-"@tanstack/query-core@^4.0.0-beta.1":
-  "integrity" "sha512-UOyOhHKLS/5i9qG2iUnZNVV3R9riJJmG9eG+hnMFIPT/oRh5UzAfjxCtBneNgPQZLDuP8y6YtRYs/n4qVAD5Ng=="
-  "resolved" "https://registry.npmjs.org/@tanstack/query-core/-/query-core-4.2.1.tgz"
-  "version" "4.2.1"
-
-"@tanstack/react-query@^4.2.1":
-  "integrity" "sha512-w02oTOYpoxoBzD/onAGRQNeLAvggLn7WZjS811cT05WAE/4Q3br0PTp388M7tnmyYGbgOOhFq0MkhH0wIfAKqA=="
-  "resolved" "https://registry.npmjs.org/@tanstack/react-query/-/react-query-4.2.1.tgz"
-  "version" "4.2.1"
+"@tanstack/match-sorter-utils@^8.0.0-alpha.82":
+  "integrity" "sha512-IdmEekEYxQsoLOR0XQyw3jD1GujBpRRYaGJYQUw1eOT1eUugWxdc7jomh1VQ1EKHcdwDLpLaCz/8y4KraU4T9A=="
+  "resolved" "https://registry.npmjs.org/@tanstack/match-sorter-utils/-/match-sorter-utils-8.1.1.tgz"
+  "version" "8.1.1"
   dependencies:
-    "@tanstack/query-core" "^4.0.0-beta.1"
+    "remove-accents" "0.4.2"
+
+"@tanstack/query-core@4.2.3":
+  "integrity" "sha512-zdt5lYWs1dZaA3IxJbCgtAfHZJScRZONpiLL7YkeOkrme5MfjQqTpjq7LYbzpyuwPOh2Jx68le0PLl57JFv5hQ=="
+  "resolved" "https://registry.npmjs.org/@tanstack/query-core/-/query-core-4.2.3.tgz"
+  "version" "4.2.3"
+
+"@tanstack/react-query-devtools@^4.2.3":
+  "integrity" "sha512-0PH8n824BnFyMrtv7q5uLS0b7jYg2tDH8vU4etkSYzV1uL4RJjiqMh7Gyi8qhYCwM+khlrkRYlNZvE0cxlp3SQ=="
+  "resolved" "https://registry.npmjs.org/@tanstack/react-query-devtools/-/react-query-devtools-4.2.3.tgz"
+  "version" "4.2.3"
+  dependencies:
+    "@tanstack/match-sorter-utils" "^8.0.0-alpha.82"
+    "@types/use-sync-external-store" "^0.0.3"
+    "use-sync-external-store" "^1.2.0"
+
+"@tanstack/react-query@^4.2.1", "@tanstack/react-query@4.2.3":
+  "integrity" "sha512-JLaMOxoJTkiAu7QpevRCt2uI/0vd3E8K/rSlCuRgWlcW5DeJDFpDS5kfzmLO5MOcD97fgsJRrDbxDORxR1FdJA=="
+  "resolved" "https://registry.npmjs.org/@tanstack/react-query/-/react-query-4.2.3.tgz"
+  "version" "4.2.3"
+  dependencies:
+    "@tanstack/query-core" "4.2.3"
     "@types/use-sync-external-store" "^0.0.3"
     "use-sync-external-store" "^1.2.0"
 
@@ -1903,6 +1919,11 @@
   "integrity" "sha512-pq2bWo9mVD43nbts2wGv17XLiNLya+GklZ8kaDLV2Z08gDCsGpnKn9BFMepvWuHCbyVvY7J5o5+BVvoQbmlJLg=="
   "resolved" "https://registry.npmjs.org/regexpp/-/regexpp-3.2.0.tgz"
   "version" "3.2.0"
+
+"remove-accents@0.4.2":
+  "integrity" "sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA=="
+  "resolved" "https://registry.npmjs.org/remove-accents/-/remove-accents-0.4.2.tgz"
+  "version" "0.4.2"
 
 "resolve-from@^4.0.0":
   "integrity" "sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g=="

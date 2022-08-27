@@ -4,7 +4,7 @@ type CountdownProps = {
     startGame: () => void;
 };
 
-const Countdown = ({ startGame }: CountdownProps) => {
+export const Countdown = ({ startGame }: CountdownProps) => {
     const [countdown, setCountdown] = useState(3);
 
     useEffect(() => {
@@ -25,5 +25,3 @@ const Countdown = ({ startGame }: CountdownProps) => {
         <div className="text-8xl text-yellow-800 text-center mb-20 select-none">{countdown}</div>
     );
 };
-
-export default Countdown;

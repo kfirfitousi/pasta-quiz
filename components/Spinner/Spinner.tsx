@@ -8,7 +8,7 @@ type SpinnerProps = {
     size: keyof typeof spinnerSizes;
 };
 
-const Spinner = ({ size }: SpinnerProps) => {
+export const Spinner = ({ size }: SpinnerProps) => {
     return (
         <svg
             width={spinnerSizes[size]}
@@ -152,5 +152,3 @@ const Spinner = ({ size }: SpinnerProps) => {
         </svg>
     );
 };
-
-export default Spinner;

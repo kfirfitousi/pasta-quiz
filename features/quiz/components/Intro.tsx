@@ -2,7 +2,7 @@ type IntroProps = {
     initGame: () => void;
 };
 
-const Intro = ({ initGame }: IntroProps) => {
+export const Intro = ({ initGame }: IntroProps) => {
     return (
         <>
             <p className="text-xl text-center text-yellow-800">
@@ -23,5 +23,3 @@ const Intro = ({ initGame }: IntroProps) => {
         </>
     );
 };
-
-export default Intro;

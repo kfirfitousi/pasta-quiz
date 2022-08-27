@@ -1,13 +1,17 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { Score, ScoreList } from 'types';
+import type { Score, ScoreList } from 'features/leaderboard';
+import type { SubmitResponse } from 'features/quiz';
 
 import { supabase } from 'lib/initSupabase';
-import { SubmitSchema } from '~/Quiz';
+import { SubmitSchema } from 'features/quiz';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+    req: NextApiRequest,
+    res: NextApiResponse<ScoreList | SubmitResponse>
+) {
     switch (req.method) {
         case 'GET': {
-            const limit = parseInt(req.query.limit as string) || Infinity;
+            const limit = +req.query.limit! || Infinity;
 
             const { error, data, count } = await supabase
                 .from<Score>('leaderboard')
@@ -19,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 return res.status(500).end('Error occured while fetching leaderboard');
             }
 
-            const scoreList: ScoreList = {
+            const scoreList = {
                 scores: data,
                 hasMore: count! > limit
             };
@@ -55,7 +59,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 return res.status(500).end('Error occured while saving score');
             }
 
-            return res.status(200).end();
+            // find position of new score in leaderboard
+            const { count } = await supabase
+                .from('leaderboard')
+                .select('*', { count: 'exact' })
+                .gte('score', score);
+
+            return res.status(200).json({
+                position: count
+            });
         }
 
         default: {

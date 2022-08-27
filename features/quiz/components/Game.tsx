@@ -1,4 +1,4 @@
-import type { RoundData, Question } from 'types';
+import type { RoundData, Question } from '../types';
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -12,7 +12,7 @@ type GameProps = {
     endGame: () => void;
 };
 
-const Game = ({ questions, collectRoundData, setFinalScore, endGame }: GameProps) => {
+export const Game = ({ questions, collectRoundData, setFinalScore, endGame }: GameProps) => {
     const [questionNumber, setQuestionNumber] = useState(0);
     const [userAnswer, setUserAnswer] = useState('');
     const [score, setScore] = useState(0);
@@ -146,5 +146,3 @@ const Game = ({ questions, collectRoundData, setFinalScore, endGame }: GameProps
         </>
     );
 };
-
-export default Game;

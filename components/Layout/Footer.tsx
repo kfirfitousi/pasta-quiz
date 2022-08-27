@@ -6,7 +6,7 @@ const badgeLoader: ImageLoader = ({ src, width, quality }) => {
     return `https://img.shields.io/badge/${src}&w=${width}&q=${quality || 75}`;
 };
 
-const Footer = () => {
+export const Footer = () => {
     return (
         <footer className="flex flex-col items-center py-4 text-xs md:text-sm text-center text-yellow-800">
             <div className="w-full">Built with</div>
@@ -78,5 +78,3 @@ const Footer = () => {
         </footer>
     );
 };
-
-export default Footer;

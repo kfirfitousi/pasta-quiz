@@ -1,6 +1,6 @@
 {
     "name": "pasta-quiz",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "scripts": {
         "dev": "next dev",
         "build": "next build",
@@ -11,6 +11,7 @@
     "dependencies": {
         "@supabase/supabase-js": "^1.35.6",
         "@tanstack/react-query": "^4.2.1",
+        "@tanstack/react-query-devtools": "^4.2.3",
         "axios": "^0.27.2",
         "clsx": "^1.2.1",
         "next": "12.2.5",

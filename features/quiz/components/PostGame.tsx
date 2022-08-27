@@ -1,10 +1,10 @@
-import type { GameData } from 'types';
+import type { GameData } from '../types';
 
-import { useSubmitScore } from 'hooks/submitScore';
+import { useSubmitScore } from '../api/submitScore';
 import { useState } from 'react';
 import { z } from 'zod';
 
-import Spinner from '~/Spinner';
+import { Spinner } from '~/Spinner';
 import Link from 'next/link';
 
 export const SubmitSchema = z.object({
@@ -30,7 +30,7 @@ type PostGameProps = {
     initGame: () => void;
 };
 
-const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
+export const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
     const [name, setName] = useState('');
     const [errors, setErrors] = useState<string[]>([]);
 
@@ -60,16 +60,28 @@ const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
 
     return (
         <>
-            <h2 className="text-lg text-yellow-800 text-center mb-2">
-                You scored {finalScore} points!
-            </h2>
+            <p className="text-lg text-yellow-800 text-center mb-2">
+                You scored {finalScore} points.
+            </p>
 
             <div className="w-2/3 mx-auto">
                 {scoreMutation.isSuccess ? (
                     <p className="text-center text-yellow-800 mb-4">
-                        Your score has been submitted to the&nbsp;
+                        {scoreMutation.data.position
+                            ? `
+                                You positioned 
+                                ${((n: number) => {
+                                    // convert number to ordinal
+                                    let s = ['th', 'st', 'nd', 'rd'];
+                                    let v = n % 100;
+                                    return n + (s[(v - 20) % 10] || s[v] || s[0]);
+                                })(scoreMutation.data.position)}
+                                in the `
+                            : `Your score has been submitted to the `}
                         <Link href="/leaderboard">
-                            <span className="underline text-bold cursor-pointer">leaderboard</span>
+                            <span className="underline text-bold cursor-pointer hover:text-yellow-600">
+                                Leaderboard
+                            </span>
                         </Link>
                         !
                     </p>
@@ -82,6 +94,7 @@ const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
+
                         {scoreMutation.isLoading ? (
                             <div className="w-20 rounded shadow-sm bg-yellow-300 text-yellow-800">
                                 <Spinner size="sm" />
@@ -97,7 +110,7 @@ const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
                     </div>
                 )}
 
-                {errors.length && (
+                {errors.length > 0 && (
                     <div className="text-center text-yellow-800 mb-4">
                         <p>There was an error submitting your score.</p>
                         Error Message(s):
@@ -119,5 +132,3 @@ const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
         </>
     );
 };
-
-export default PostGame;

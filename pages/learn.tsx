@@ -2,21 +2,21 @@ import type { NextPage, GetStaticProps } from 'next';
 
 import { dehydrate } from '@tanstack/react-query';
 import { queryClient } from 'lib/react-query';
-import { getShapes } from 'hooks/getShapes';
+import { getShapes } from 'features/learn';
 
-import Layout from '~/Layout';
-import PastaCards from '~/PastaCards';
+import { PageLayout } from '~/Layout';
+import { PastaCards } from 'features/learn';
 
 const Learn: NextPage = () => {
     return (
-        <Layout
+        <PageLayout
             title="Pasta Quiz | Learn"
             description="Put your Pasta knowledge to the test! 
             How many pasta shapes can you recognize?
             Learn about pasta shapes here."
         >
             <PastaCards />
-        </Layout>
+        </PageLayout>
     );
 };
 

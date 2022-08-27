@@ -1,14 +1,14 @@
 import Head from 'next/head';
-import Header from './Header';
-import Footer from './Footer';
+import { Header } from './Header';
+import { Footer } from './Footer';
 
-type LayoutProps = {
+type PageLayoutProps = {
     children?: React.ReactNode;
     title: string;
     description: string;
 };
 
-const Layout = ({ children, title, description }: LayoutProps) => {
+export const PageLayout = ({ children, title, description }: PageLayoutProps) => {
     return (
         <>
             <Head>
@@ -30,5 +30,3 @@ const Layout = ({ children, title, description }: LayoutProps) => {
         </>
     );
 };
-
-export default Layout;

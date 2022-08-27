@@ -1,9 +1,13 @@
-import { useShapes } from 'hooks/getShapes';
+import { useShapes } from '../api/getShapes';
 
-import PastaCard from './PastaCard';
+import { PastaCard } from './PastaCard';
 
-const PastaCards = () => {
-    const { data, isError } = useShapes();
+export const PastaCards = () => {
+    const { data, isError } = useShapes({
+        config: {
+            staleTime: 60 * 60 * 1000
+        }
+    });
 
     if (isError) {
         return (
@@ -22,5 +26,3 @@ const PastaCards = () => {
         </div>
     );
 };
-
-export default PastaCards;

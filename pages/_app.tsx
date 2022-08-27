@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import { Hydrate, QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from 'lib/react-query';
 
-import Spinner from '~/Spinner';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Spinner } from '~/Spinner';
 
 import 'styles/globals.css';
 
@@ -40,6 +41,8 @@ const PastaQuiz = ({ Component, pageProps, router }: AppProps) => {
                 )}
 
                 <Component {...pageProps} />
+
+                <ReactQueryDevtools initialIsOpen={false} />
             </Hydrate>
         </QueryClientProvider>
     );

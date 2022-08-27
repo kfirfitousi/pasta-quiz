@@ -1,4 +1,4 @@
-import type { Shape } from 'types';
+import type { Shape } from '../types';
 
 import { useState } from 'react';
 
@@ -8,7 +8,7 @@ type PastaCardProps = {
     shape: Shape;
 };
 
-const PastaCard = ({ shape }: PastaCardProps) => {
+export const PastaCard = ({ shape }: PastaCardProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
     if (isOpen) {
@@ -63,5 +63,3 @@ const PastaCard = ({ shape }: PastaCardProps) => {
         );
     }
 };
-
-export default PastaCard;

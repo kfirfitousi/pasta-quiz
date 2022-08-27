@@ -27,6 +27,6 @@ export type QueryConfig<QueryFnType extends (...args: any) => any> = Omit<
 
 export type MutationConfig<MutationFnType extends (...args: any) => any> = UseMutationOptions<
     ExtractFnReturnType<MutationFnType>,
-    AxiosError<string>,
+    AxiosError,
     Parameters<MutationFnType>[0]
 >;

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import clsx from 'clsx';
 
-const Header = () => {
+export const Header = () => {
     const router = useRouter();
 
     const routes = [
@@ -33,5 +33,3 @@ const Header = () => {
         </header>
     );
 };
-
-export default Header;

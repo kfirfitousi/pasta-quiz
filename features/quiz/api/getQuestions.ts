@@ -1,8 +1,8 @@
 import type { ExtractFnReturnType, QueryConfig } from 'lib/react-query';
-import type { Question } from 'types';
+import type { Question } from '../types';
 
 import { useQuery } from '@tanstack/react-query';
-import { sample, shuffle } from 'utils';
+import { sample, shuffle } from '../utils/random';
 
 export const getQuestions = async (): Promise<Question[]> => {
     const { shapes, wrongAnswers } = await import('data/pasta.json');
