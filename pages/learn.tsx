@@ -22,7 +22,7 @@ const Learn: NextPage = () => {
 
 export const getStaticProps: GetStaticProps = async () => {
     await queryClient.prefetchQuery(['shapes'], () => getShapes(), {
-        staleTime: 100000
+        staleTime: 60 * 60 * 1000
     });
 
     return {
