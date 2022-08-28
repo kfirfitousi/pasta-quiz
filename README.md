@@ -1,10 +1,10 @@
 # Pasta Quiz
 
-### Put your pasta knowledge to the test!
+### Quiz application featuring:
 
-In this quiz there are 10 rounds, in each one you must name the pasta shape within 15 seconds.
-
-## Tech
+✅ SSG (Static Site Generation) with `Next.js` and `React Query`  
+✅ strict typing with `TypeScript` and `zod`  
+✅ scalable feature-based project structure
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
@@ -13,6 +13,13 @@ In this quiz there are 10 rounds, in each one you must name the pasta shape with
 ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
+
+## Status
+
+![Status](https://img.shields.io/github/deployments/kfirfitousi/pasta-quiz/production?label=vercel&logo=vercel&style=for-the-badge)
+![Website](https://img.shields.io/website?down_color=lightgrey&down_message=down&style=for-the-badge&up_color=limegreen&up_message=online&url=https%3A%2F%2Fpasta.kfirfitousi.com)
+
+Available on [https://pasta.kfirfitousi.com](https://pasta.kfirfitousi.com).
 
 ## Development
 
