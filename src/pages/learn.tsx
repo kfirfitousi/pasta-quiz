@@ -1,11 +1,11 @@
 import type { NextPage, GetStaticProps } from 'next';
 
 import { dehydrate } from '@tanstack/react-query';
-import { queryClient } from 'lib/react-query';
-import { getShapes } from 'features/learn';
+import { queryClient } from '@/lib/react-query';
+import { getShapes } from '@/features/learn';
 
 import { PageLayout } from '~/Layout';
-import { PastaCards } from 'features/learn';
+import { PastaCards } from '@/features/learn';
 
 const Learn: NextPage = () => {
     return (

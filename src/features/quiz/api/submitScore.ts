@@ -1,8 +1,8 @@
 import type { GameData, SubmitResponse } from '../types';
 
 import { useMutation } from '@tanstack/react-query';
-import { MutationConfig, queryClient } from 'lib/react-query';
-import { axios } from 'lib/axios';
+import { MutationConfig, queryClient } from '@/lib/react-query';
+import { axios } from '@/lib/axios';
 
 type SubmitParams = {
     name: string;

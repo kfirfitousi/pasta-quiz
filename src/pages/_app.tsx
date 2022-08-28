@@ -2,12 +2,12 @@ import type { AppProps } from 'next/app';
 
 import { useState, useEffect } from 'react';
 import { Hydrate, QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from 'lib/react-query';
+import { queryClient } from '@/lib/react-query';
 
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Spinner } from '~/Spinner';
 
-import 'styles/globals.css';
+import '@/styles/globals.css';
 
 const PastaQuiz = ({ Component, pageProps, router }: AppProps) => {
     const [isLoading, setIsLoading] = useState(false);

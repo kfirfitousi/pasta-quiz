@@ -1,4 +1,4 @@
-import type { ExtractFnReturnType, QueryConfig } from 'lib/react-query';
+import type { ExtractFnReturnType, QueryConfig } from '@/lib/react-query';
 import type { Question } from '../types';
 
 import { useQuery } from '@tanstack/react-query';

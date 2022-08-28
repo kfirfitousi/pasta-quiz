@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 
 import { PageLayout } from '~/Layout';
-import { Quiz } from 'features/quiz';
+import { Quiz } from '@/features/quiz';
 
 const Home: NextPage = () => {
     return (

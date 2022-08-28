@@ -1,11 +1,11 @@
 import type { NextPage, GetStaticProps } from 'next';
 
 import { dehydrate } from '@tanstack/react-query';
-import { queryClient } from 'lib/react-query';
-import { getLeaderboard } from 'features/leaderboard';
+import { queryClient } from '@/lib/react-query';
+import { getLeaderboard } from '@/features/leaderboard';
 
 import { PageLayout } from '~/Layout';
-import { ScoreTable } from 'features/leaderboard';
+import { ScoreTable } from '@/features/leaderboard';
 
 const Leaderboard: NextPage = () => {
     return (

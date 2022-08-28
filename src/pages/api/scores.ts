@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { Score, ScoreList } from 'features/leaderboard';
-import type { SubmitResponse } from 'features/quiz';
+import type { Score, ScoreList } from '@/features/leaderboard';
+import type { SubmitResponse } from '@/features/quiz';
 
-import { supabase } from 'lib/initSupabase';
-import { SubmitSchema } from 'features/quiz';
+import { supabase } from '@/lib/initSupabase';
+import { SubmitSchema } from '@/features/quiz';
 
 export default async function handler(
     req: NextApiRequest,
