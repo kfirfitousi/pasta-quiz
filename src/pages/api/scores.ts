@@ -3,7 +3,7 @@ import type { Score, ScoreList } from '@/features/leaderboard';
 import type { SubmitResponse } from '@/features/quiz';
 
 import { supabase } from '@/lib/initSupabase';
-import { SubmitSchema } from '@/features/quiz';
+import { ScoreSubmitSchema } from '@/features/quiz';
 
 export default async function handler(
     req: NextApiRequest,
@@ -25,14 +25,14 @@ export default async function handler(
 
             const scoreList = {
                 scores: data,
-                hasMore: count! > limit
+                hasMore: (count ?? 0) > limit
             };
 
             return res.status(200).json(scoreList);
         }
 
         case 'POST': {
-            const request = SubmitSchema.safeParse(req.body);
+            const request = ScoreSubmitSchema.safeParse(req.body);
 
             if (!request.success) {
                 return res
@@ -40,13 +40,11 @@ export default async function handler(
                     .end(request.error.issues.map((issue) => issue.message).join('\n'));
             }
 
-            const { name, gameData } = request.data;
+            const { name, roundResults } = request.data;
 
-            // calculate score based on game data
-            const score = gameData.reduce((total, round) => {
-                return round.answer === round.correctAnswer
-                    ? Math.ceil(total + round.timer * 10)
-                    : total;
+            // calculate score based on round results
+            const score = roundResults.reduce((acc, round) => {
+                return round.isCorrect ? Math.ceil(acc + round.timer * 10) : acc;
             }, 0);
 
             const { error } = await supabase.from('leaderboard').insert({

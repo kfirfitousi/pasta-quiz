@@ -1,8 +1,22 @@
-type IntroProps = {
-    initGame: () => void;
-};
+import { useQuestions } from '../api/getQuestions';
+import { useQuizStore } from '../stores/quizStore';
 
-export const Intro = ({ initGame }: IntroProps) => {
+import { Spinner } from '~/Spinner';
+
+export const Intro = () => {
+    const { isFetching, refetch } = useQuestions({
+        config: {
+            enabled: false // disable automatic refetching
+        }
+    });
+
+    const { initGame } = useQuizStore();
+
+    const handleClick = async () => {
+        const questionsQuery = await refetch();
+        initGame(questionsQuery.data);
+    };
+
     return (
         <>
             <p className="text-xl text-center text-yellow-800">
@@ -15,9 +29,10 @@ export const Intro = ({ initGame }: IntroProps) => {
             <div className="w-32 mx-auto mb-20">
                 <button
                     className="w-full h-9 mx-auto rounded shadow-md bg-yellow-300 text-yellow-800 hover:bg-yellow-800 hover:text-yellow-300"
-                    onClick={() => initGame()}
+                    disabled={isFetching}
+                    onClick={handleClick}
                 >
-                    Play
+                    {isFetching ? <Spinner size="sm" /> : 'Play'}
                 </button>
             </div>
         </>

@@ -4,14 +4,11 @@ export type Question = {
     correctAnswer: string;
 };
 
-export type SubmitResponse = {
-    position: number | null;
-};
-
-export type RoundData = {
-    correctAnswer: string;
-    answer: string;
+export type RoundResult = {
+    isCorrect: boolean;
     timer: number;
 };
 
-export type GameData = RoundData[];
+export type SubmitResponse = {
+    position: number | null;
+};

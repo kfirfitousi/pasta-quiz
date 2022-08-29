@@ -1,27 +1,27 @@
 import { useEffect, useState } from 'react';
 
 type CountdownProps = {
-    startGame: () => void;
+    time: number;
+    onComplete: () => void;
 };
 
-export const Countdown = ({ startGame }: CountdownProps) => {
-    const [countdown, setCountdown] = useState(3);
+export const Countdown = ({ time, onComplete }: CountdownProps) => {
+    const [timer, setTimer] = useState(time);
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setCountdown((prev) => prev - 1);
+            setTimer((prev) => prev - 1);
         }, 1000);
 
-        return () => clearInterval(interval);
-    }, []);
+        const timer = setTimeout(() => {
+            onComplete();
+        }, time * 1000);
 
-    useEffect(() => {
-        if (countdown <= 0) {
-            startGame();
-        }
-    }, [countdown, startGame]);
+        return () => {
+            clearInterval(interval);
+            clearTimeout(timer);
+        };
+    }, [time, onComplete]);
 
-    return (
-        <div className="text-8xl text-yellow-800 text-center mb-20 select-none">{countdown}</div>
-    );
+    return <div className="text-8xl text-yellow-800 text-center mb-20 select-none">{timer}</div>;
 };

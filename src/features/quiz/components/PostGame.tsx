@@ -1,19 +1,19 @@
-import type { GameData } from '../types';
-
-import { useSubmitScore } from '../api/submitScore';
 import { useState } from 'react';
+import { useQuestions } from '../api/getQuestions';
+import { useSubmitScore } from '../api/submitScore';
+import { useQuizStore } from '../stores/quizStore';
+import shallow from 'zustand/shallow';
 import { z } from 'zod';
 
 import { Spinner } from '~/Spinner';
 import Link from 'next/link';
 
-export const SubmitSchema = z.object({
+export const ScoreSubmitSchema = z.object({
     name: z.string().min(1, 'Please enter your name'),
-    gameData: z
+    roundResults: z
         .array(
             z.object({
-                correctAnswer: z.string(),
-                answer: z.string(),
+                isCorrect: z.boolean(),
                 timer: z.number().min(0).max(15)
             }),
             {
@@ -24,15 +24,24 @@ export const SubmitSchema = z.object({
         .length(10, 'Malformed game data')
 });
 
-type PostGameProps = {
-    gameData: GameData;
-    finalScore: number;
-    initGame: () => void;
-};
-
-export const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
+export const PostGame = () => {
     const [name, setName] = useState('');
     const [errors, setErrors] = useState<string[]>([]);
+
+    const { score, roundResults, initGame } = useQuizStore(
+        (state) => ({
+            score: state.score,
+            roundResults: state.roundResults,
+            initGame: state.initGame
+        }),
+        shallow
+    );
+
+    const { isFetching, refetch } = useQuestions({
+        config: {
+            enabled: false // disable automatic refetching
+        }
+    });
 
     const scoreMutation = useSubmitScore({
         config: {
@@ -45,9 +54,9 @@ export const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
     const handleSubmit = () => {
         setErrors([]);
 
-        const validation = SubmitSchema.safeParse({
+        const validation = ScoreSubmitSchema.safeParse({
             name,
-            gameData
+            roundResults
         });
 
         if (!validation.success) {
@@ -58,11 +67,14 @@ export const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
         scoreMutation.mutate(validation.data);
     };
 
+    const handlePlayAgain = async () => {
+        const questionsQuery = await refetch();
+        initGame(questionsQuery.data);
+    };
+
     return (
         <>
-            <p className="text-lg text-yellow-800 text-center mb-2">
-                You scored {finalScore} points.
-            </p>
+            <p className="text-lg text-yellow-800 text-center mb-2">You scored {score} points.</p>
 
             <div className="w-2/3 mx-auto">
                 {scoreMutation.isSuccess ? (
@@ -124,9 +136,10 @@ export const PostGame = ({ gameData, finalScore, initGame }: PostGameProps) => {
             <div className="w-36 mx-auto mb-20">
                 <button
                     className="w-full h-8 mx-auto rounded shadow-sm bg-yellow-300 text-yellow-800 hover:bg-yellow-800 hover:text-yellow-300"
-                    onClick={() => initGame()}
+                    disabled={isFetching}
+                    onClick={handlePlayAgain}
                 >
-                    Play Again
+                    {isFetching ? <Spinner size="sm" /> : 'Play Again'}
                 </button>
             </div>
         </>

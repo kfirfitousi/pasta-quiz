@@ -1,4 +1,4 @@
-import type { GameData, SubmitResponse } from '../types';
+import type { RoundResult, SubmitResponse } from '../types';
 
 import { useMutation } from '@tanstack/react-query';
 import { MutationConfig, queryClient } from '@/lib/react-query';
@@ -6,13 +6,13 @@ import { axios } from '@/lib/axios';
 
 type SubmitParams = {
     name: string;
-    gameData: GameData;
+    roundResults: RoundResult[];
 };
 
-export const submitScore = ({ name, gameData }: SubmitParams): Promise<SubmitResponse> => {
+export const submitScore = ({ name, roundResults }: SubmitParams): Promise<SubmitResponse> => {
     return axios.post('/api/scores', {
         name,
-        gameData
+        roundResults
     });
 };
 
