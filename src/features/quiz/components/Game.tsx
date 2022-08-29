@@ -63,7 +63,8 @@ export const Game = () => {
                                 (!userAnswer || userAnswer !== answer) &&
                                     'text-yellow-800 bg-yellow-300',
 
-                                !userAnswer && 'hover:shadow-lg hover:text-yellow-300 hover:bg-yellow-800'
+                                !userAnswer &&
+                                    'hover:shadow-lg hover:text-yellow-300 hover:bg-yellow-800'
                             )}
                             disabled={!!userAnswer}
                             onClick={() => handleAnswerClick(answer)}

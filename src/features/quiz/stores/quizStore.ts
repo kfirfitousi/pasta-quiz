@@ -16,11 +16,11 @@ export type QuizStore = {
     timeoutId: NodeJS.Timeout | null;
     error: string | null;
     initGame: (questions?: Question[]) => void;
-    startGame: () => void;
     handleAnswer: (answer: string, timer: number) => void;
-    nextRound: () => void;
     startTimer: (seconds: number) => void;
     stopTimer: () => void;
+    startGame: () => void;
+    nextRound: () => void;
     reset: () => void;
 };
 

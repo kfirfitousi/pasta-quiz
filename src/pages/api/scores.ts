@@ -23,12 +23,10 @@ export default async function handler(
                 return res.status(500).end('Error occured while fetching leaderboard');
             }
 
-            const scoreList = {
+            return res.status(200).json({
                 scores: data,
                 hasMore: (count ?? 0) > limit
-            };
-
-            return res.status(200).json(scoreList);
+            });
         }
 
         case 'POST': {

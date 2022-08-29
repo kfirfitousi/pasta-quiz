@@ -24,6 +24,7 @@ const PastaQuiz = ({ Component, pageProps, router }: AppProps) => {
         router.events.on('routeChangeStart', handleRoutingStart);
         router.events.on('routeChangeComplete', handleRoutingEnd);
         router.events.on('routeChangeError', handleRoutingEnd);
+
         return () => {
             router.events.off('routeChangeStart', handleRoutingStart);
             router.events.off('routeChangeComplete', handleRoutingEnd);

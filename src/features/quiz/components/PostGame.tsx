@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useQuestions } from '../api/getQuestions';
 import { useSubmitScore } from '../api/submitScore';
 import { useQuizStore } from '../stores/quizStore';
-import shallow from 'zustand/shallow';
 import { z } from 'zod';
+import shallow from 'zustand/shallow';
 
 import { Spinner } from '~/Spinner';
 import Link from 'next/link';
@@ -80,8 +80,7 @@ export const PostGame = () => {
                 {scoreMutation.isSuccess ? (
                     <p className="text-center text-yellow-800 mb-4">
                         {scoreMutation.data.position
-                            ? `
-                                You positioned 
+                            ? `You positioned 
                                 ${((n: number) => {
                                     // convert number to ordinal
                                     let s = ['th', 'st', 'nd', 'rd'];

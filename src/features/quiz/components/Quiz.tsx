@@ -28,11 +28,8 @@ export const Quiz = () => {
     return (
         <section className="h-full flex flex-col justify-center items-center">
             {gameState === 'intro' && <Intro />}
-
             {gameState === 'countdown' && <Countdown time={3} onComplete={startGame} />}
-
             {gameState === 'game' && <Game />}
-
             {gameState === 'post-game' && <PostGame />}
 
             {error && <p className="text-red-500">Error: {error}</p>}
