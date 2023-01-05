@@ -49,9 +49,15 @@
   version "12.2.5"
   resolved "https://registry.npmjs.org/@next/env/-/env-12.2.5.tgz"
 
-"@next/eslint-plugin-next@12.2.5", "@next/eslint-plugin-next@^12.2.5":
+"@next/eslint-plugin-next@12.2.5":
   version "12.2.5"
   resolved "https://registry.npmjs.org/@next/eslint-plugin-next/-/eslint-plugin-next-12.2.5.tgz"
+  dependencies:
+    glob "7.1.7"
+
+"@next/eslint-plugin-next@^13.1.1":
+  version "13.1.1"
+  resolved "https://registry.yarnpkg.com/@next/eslint-plugin-next/-/eslint-plugin-next-13.1.1.tgz#cc5e419cc85587f73f2ac0046a91df01dc6fef8b"
   dependencies:
     glob "7.1.7"
 
