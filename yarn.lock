@@ -206,9 +206,9 @@
   version "0.0.29"
   resolved "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
 
-"@types/node@18.7.4":
-  version "18.7.4"
-  resolved "https://registry.npmjs.org/@types/node/-/node-18.7.4.tgz"
+"@types/node@18.11.18":
+  version "18.11.18"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.18.tgz#8dfb97f0da23c2293e554c5a50d61ef134d7697f"
 
 "@types/phoenix@^1.5.4":
   version "1.5.4"
